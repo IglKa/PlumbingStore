@@ -1,7 +1,27 @@
-from django.http import HttpResponse
-from django.shortcuts import render
+from django.contrib.auth import login, authenticate
+from django.views.generic import TemplateView, DetailView
+from django.views.generic.edit import FormView
+
+from .forms import UserForm
 
 
-def index(request):
-    context = 'Hello, User!'
-    return render(request, 'usersapp/registration.html', {'context': context})
+class ProfileView(DetailView):
+    pass
+
+
+class TemplateView(TemplateView):
+    template_name = 'registration/page.html'
+
+
+class UserCreation(FormView):
+    template_name = 'registration/registration.html'
+    form_class = UserForm
+    success_url = '/'
+
+    def form_valid(self, form):
+        form.save()
+        email = self.request.POST['email']
+        password = self.request.POST['password']
+        user = authenticate(self.request, username=email, password=password)
+        login(self.request, user=user)
+        return super().form_valid(form)
