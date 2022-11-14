@@ -3,12 +3,19 @@ from django.views.generic import TemplateView, DetailView
 from django.views.generic.edit import FormView
 
 from .forms import UserForm
+from .models import User
 
 
+# Profile page view
 class ProfileView(DetailView):
-    pass
+    # TODO: Метод post для обновления данных на сайте.
+
+    model = User
+    template_name = 'registration/profile.html'
+    context_object_name = 'profile'
 
 
+# TODO: Убрать временную пагу и добавить нормальную страницу
 class TemplateView(TemplateView):
     template_name = 'registration/page.html'
 

@@ -10,5 +10,5 @@ urlpatterns = [
     path('', include('django.contrib.auth.urls')),
     path('page/', views.TemplateView.as_view(), name="page"),
     path('registration/', views.UserCreation.as_view(), name='registration'),
-    path('profile/', views.ProfileView.as_view(), name="profile"),
+    path('profile/<int:pk>/', views.ProfileView.as_view(), name="profile"),
 ]

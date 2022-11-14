@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block title %}Profile{% endblock %}
+
+{% block content %}
+<h1>Профиль</h1> <br>
+<!--TODO: Провести статику и добавить фотографии-->
+<form>
+    <!--TODO: Сделать форму обновления данных-->
+    Email: {{ profile.email }}<br>
+    First name: {{ profile.first_name }}<br>
+    Last name: {{ profile.last_name }}<br>
+</form>
+
+
+{% endblock %}
