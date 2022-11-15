@@ -32,6 +32,8 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 AUTH_USER_MODEL = 'usersapp.User'
+LOGIN_REDIRECT_URL = '/accounts/page'      #TODO:'marketplace/'
+LOGOUT_REDIRECT_URL = '/accounts/page'
 
 # Application definition
 
