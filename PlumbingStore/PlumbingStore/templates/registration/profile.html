@@ -4,13 +4,15 @@
 
 {% block content %}
 <h1>Профиль</h1> <br>
+
+
 <!--TODO: Провести статику и добавить фотографии-->
-<form>
-    <!--TODO: Сделать форму обновления данных-->
+
     Email: {{ profile.email }}<br>
+
     First name: {{ profile.first_name }}<br>
-    Last name: {{ profile.last_name }}<br>
-</form>
 
+    Second name: {{ profile.last_name }}<br>
 
+    <a href="{% url 'usersapp:settings' %}"></a>
 {% endblock %}

@@ -6,10 +6,8 @@ from .forms import UserForm
 from .models import User
 
 
-# Profile page view
+# User profile page
 class ProfileView(DetailView):
-    # TODO: Метод post для обновления данных на сайте.
-
     model = User
     template_name = 'registration/profile.html'
     context_object_name = 'profile'
