@@ -1,3 +1,7 @@
 from django.contrib import admin
 
-# Register your models here.
+from .models import Advertisment, Feedback
+
+
+admin.site.register(Advertisment)
+admin.site.register(Feedback)

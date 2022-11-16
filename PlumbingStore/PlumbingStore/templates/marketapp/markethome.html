@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+
+{% block title %}Market{% endblock %}
+
+
+{% block content %}
+
+<h1>Marketplace start point</h1><br>
+
+{% for a in advert %}
+<a href="{% url 'marketapp:adv_det' a.pk %}">{{ a.title }}</a><br>
+{% endfor %}
+
+{% endblock %}
