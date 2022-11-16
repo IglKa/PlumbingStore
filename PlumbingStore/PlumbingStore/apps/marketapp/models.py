@@ -27,7 +27,10 @@ class Advertisment(models.Model):
 
 
 class Feedback(models.Model):
-
+    # I dunno what to do with my imports, but they're not working.
+    # So I did Foreignkeys like this.
+    # "from usersapp.models import User" smth like this doesn't work, what do I do?
+    # It didn't work in any of my last projects HEEEEEEEELP
     user = models.ForeignKey('usersapp.User', on_delete=models.CASCADE, null=False)
     advert = models.ForeignKey(Advertisment, on_delete=models.CASCADE, null=False)
     text = models.TextField(max_length=5000)

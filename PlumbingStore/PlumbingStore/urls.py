@@ -25,5 +25,5 @@ urlpatterns = [
     path('accounts/', include('usersapp.urls')),
     # TODO: path('settings/', include('user-settings.urls')),
 
-    path('market/', include('marketapp.urls')),
+    path('adverts/', include('marketapp.urls')),
 ]

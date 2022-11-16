@@ -7,7 +7,7 @@
 {% block content %}
 
 <h1>Marketplace start point</h1><br>
-
+<a href="{% url 'marketapp:create_adv' %}">Create Advert</a><br>
 {% for a in advert %}
 <a href="{% url 'marketapp:adv_det' a.pk %}">{{ a.title }}</a><br>
 {% endfor %}
