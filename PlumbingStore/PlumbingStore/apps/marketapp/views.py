@@ -25,8 +25,11 @@ class CreateAdvert(CreateView):
     template_name = 'marketapp/createadvert.html'
     context_object_name = 'advert'
 
-    #TODO: Научиться распаковывать dict объекты, поменять "self.request.POST['user']" на id User
-    #Тут надо прооперировать словарём. функция принимает его, оперирует и возвращает. Сам request неизменяем.
+
     def post(self, request):
-        user = User.objects.filter(email = self.request.user)[0].id
-        self.request.POST['user'] = user
+        #Because I don't want to give QueryDict 'user' field right from the form, I override the
+        #post method here.
+        user = User.objects.filter(email=self.request.user)[0].id
+        context = self.request.POST.copy()
+        context['user'] = user
+        return context
