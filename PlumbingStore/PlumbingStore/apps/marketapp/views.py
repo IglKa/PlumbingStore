@@ -1,9 +1,12 @@
+from django.shortcuts import render
+from django.urls import reverse_lazy
 from usersapp.models import User
 from django.views.generic import ListView, DetailView
 from django.views.generic.edit import CreateView
+from django.http import HttpResponse
 
 from .models import Advertisment, Feedback
-from .forms import CreateAdvert
+from .forms import CreateAdvertForm
 
 
 class MarketHome(ListView):
@@ -19,16 +22,15 @@ class AdvertDetail(DetailView):
     #TODO: Сделать поиск по slug
     pk_url_kwarg = 'adv_pk'
 
-
+#TODO: Убрать баг, хз как, ебать
 class CreateAdvert(CreateView):
-    form_class = CreateAdvert
+    form_class = CreateAdvertForm
     template_name = 'marketapp/createadvert.html'
     context_object_name = 'advert'
+    success_url = reverse_lazy('adverts/')
 
-
-    def post(self, request):
-        #Because I don't want to give QueryDict 'user' field right from the form, I override the
-        #post method here.
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
         user = User.objects.filter(email=self.request.user)[0].id
         context = self.request.POST.copy()
         context['user'] = user

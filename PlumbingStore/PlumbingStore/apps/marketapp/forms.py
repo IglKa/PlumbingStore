@@ -2,7 +2,7 @@ from .models import Advertisment
 from django import forms
 
 
-class CreateAdvert(forms.ModelForm):
+class CreateAdvertForm(forms.ModelForm):
     class Meta:
         model = Advertisment
         fields = ['category', 'title',
