@@ -4,7 +4,7 @@ from django.views.generic.edit import FormView
 
 from .forms import UserForm
 from .models import User
-
+#TODO: Исправить баги с входом и регестрацией
 
 # User profile page
 class ProfileView(DetailView):
@@ -17,7 +17,7 @@ class ProfileView(DetailView):
 class TemplateView(TemplateView):
     template_name = 'registration/page.html'
 
-
+#Todo: Подумать над использованием CreateView вместо FormView.
 class UserCreation(FormView):
     template_name = 'registration/registration.html'
     form_class = UserForm
@@ -27,6 +27,6 @@ class UserCreation(FormView):
         form.save()
         email = self.request.POST['email']
         password = self.request.POST['password']
-        user = authenticate(self.request, username=email, password=password)
+        user = authenticate(self.request, email=email, password=password)
         login(self.request, user=user)
         return super().form_valid(form)

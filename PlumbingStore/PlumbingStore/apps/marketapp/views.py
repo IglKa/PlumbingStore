@@ -6,7 +6,6 @@ from django.views.generic.edit import CreateView, FormView
 from django.contrib.auth.mixins import LoginRequiredMixin
 
 from .models import Advertisment, Feedback
-from .forms import CreateAdvertForm
 
 
 class MarketHome(ListView):
@@ -32,6 +31,6 @@ class CreateAdvert(LoginRequiredMixin, CreateView):
     success_url = reverse_lazy('marketapp:homepage')
 
     def form_valid(self, form):
-        form.instance.created_by = self.request.user
+        form.instance.user = self.request.user
         return super().form_valid(form)
 
