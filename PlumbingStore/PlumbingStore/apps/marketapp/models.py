@@ -1,5 +1,6 @@
 from django.db import models
 from django.utils import timezone
+from django.conf import settings
 
 
 class Advertisment(models.Model):
@@ -17,7 +18,7 @@ class Advertisment(models.Model):
     description = models.TextField(max_length=5000)
     image = models.ImageField(blank=True)
     date_posted = models.DateTimeField(default=timezone.now)
-    user = models.ForeignKey('usersapp.User', on_delete=models.CASCADE, null=False)
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, null=True)
 
     slug = models.SlugField(max_length=100,
                             null=True,
@@ -31,7 +32,7 @@ class Feedback(models.Model):
     # So I did Foreignkeys like this.
     # "from usersapp.models import User" smth like this doesn't work, what do I do?
     # It didn't work in any of my last projects HEEEEEEEELP
-    user = models.ForeignKey('usersapp.User', on_delete=models.CASCADE, null=False)
+    user = models.ForeignKey('usersapp.User', on_delete=models.CASCADE, null=True)
     advert = models.ForeignKey(Advertisment, on_delete=models.CASCADE, null=False)
     text = models.TextField(max_length=5000)
     image = models.ImageField(blank=True)

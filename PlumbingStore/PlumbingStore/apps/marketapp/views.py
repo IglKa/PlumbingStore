@@ -1,9 +1,9 @@
-from django.shortcuts import render
+from django.shortcuts import redirect
 from django.urls import reverse_lazy
 from usersapp.models import User
 from django.views.generic import ListView, DetailView
-from django.views.generic.edit import CreateView
-from django.http import HttpResponse
+from django.views.generic.edit import CreateView, FormView
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 from .models import Advertisment, Feedback
 from .forms import CreateAdvertForm
@@ -22,16 +22,16 @@ class AdvertDetail(DetailView):
     #TODO: Сделать поиск по slug
     pk_url_kwarg = 'adv_pk'
 
-#TODO: Убрать баг, хз как, ебать
-class CreateAdvert(CreateView):
-    form_class = CreateAdvertForm
-    template_name = 'marketapp/createadvert.html'
-    context_object_name = 'advert'
-    success_url = reverse_lazy('adverts/')
 
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        user = User.objects.filter(email=self.request.user)[0].id
-        context = self.request.POST.copy()
-        context['user'] = user
-        return context
+class CreateAdvert(LoginRequiredMixin, CreateView):
+    model = Advertisment
+    fields = ['category', 'title',
+              'description', 'image'
+              ]
+    template_name = 'marketapp/createadvert.html'
+    success_url = reverse_lazy('marketapp:homepage')
+
+    def form_valid(self, form):
+        form.instance.created_by = self.request.user
+        return super().form_valid(form)
+
