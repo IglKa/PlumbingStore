@@ -4,8 +4,8 @@
 
 {% block content %}
 <form action="{% url 'usersapp:login' %}"  method="post">
-    {% csrf_token %}
     {{ form }}
+    {% csrf_token %}
     <button type="submit">Login</button>
 </form>
 

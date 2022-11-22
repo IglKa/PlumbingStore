@@ -1,11 +1,11 @@
-from django.shortcuts import redirect
-from django.urls import reverse_lazy
-from usersapp.models import User
 from django.views.generic import ListView, DetailView
 from django.views.generic.edit import CreateView, FormView
+from django.shortcuts import redirect
+from django.urls import reverse_lazy
 from django.contrib.auth.mixins import LoginRequiredMixin
 
 from .models import Advertisment, Feedback
+from usersapp.models import User
 
 
 class MarketHome(ListView):
@@ -33,4 +33,3 @@ class CreateAdvert(LoginRequiredMixin, CreateView):
     def form_valid(self, form):
         form.instance.user = self.request.user
         return super().form_valid(form)
-

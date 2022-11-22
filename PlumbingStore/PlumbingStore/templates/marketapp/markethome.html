@@ -1,13 +1,22 @@
 {% extends 'base.html' %}
 
+{% load static %}
+
+<link type="text/css" href="{% static 'css/marketapp/homepage.css' %}" rel="stylesheet">
 
 {% block title %}Market{% endblock %}
 
-
 {% block content %}
 
-<h1>Marketplace start point</h1><br>
+<header>
+    <h1>Marketplace start point</h1><br>
+</header>
+
+
+{% if user.is_authenticated %}
 <a href="{% url 'marketapp:create_adv' %}">Create Advert</a><br>
+{% endif %}
+
 {% for a in advert %}
 <a href="{% url 'marketapp:adv_det' a.pk %}">{{ a.title }}</a><br>
 {% endfor %}
