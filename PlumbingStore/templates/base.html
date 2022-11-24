@@ -3,11 +3,34 @@
 <head>
     <!--TODO: Сделать все темплейты красивее-->
     <meta charset="UTF-8">
+    {% load static %}
+    <link type="text/css" href="{% static 'marketapp/css/mainpage.css' %}" rel="stylesheet">
     <title>{% block title %}base{% endblock %}</title>
 </head>
 <body>
     {% block content %}
-    Something
+
+    <header>
+        <div>
+            <h1>Marketplace</h1><br>
+        </div>
+    </header>
+
+    {% if user.is_authenticated %}
+    <a href="{% url 'marketapp:create_adv' %}">Create Advert</a><br>
+    {% endif %}
+
+    {% for a in advert %}
+    <div>
+        <a href="{% url 'marketapp:advert_page' a.pk %}">
+            {{ a.image }}<br>
+            {{ a.title }}<br>
+            {{ a.description }}<br>
+        </a>
+    </div>
+
+    {% endfor %}
+
     {% endblock %}
 </body>
 </html>

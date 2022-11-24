@@ -15,10 +15,26 @@ from usersapp.models import User
 # TODO: РЕФАКТОРИНГ
 
 
+# TODO: relocate to utils.py
+# The <div> where all the links will be displayed
+menu_block = [
+    'Profile',
+    'My Store',
+    'Shopping Cart',
+    'Settings',
+]
+
+
 class MarketHome(ListView):
     model = Advertisment
-    template_name = 'marketapp/markethome.html'
+    template_name = 'base.html'
     context_object_name = 'advert'
+
+    def get_context_data(self, **kwargs):
+        """Adds menu in template"""
+        context = super().get_context_data(**kwargs)
+        context['menu'] = menu_block
+        return context
 
 
 class CreateAdvert(LoginRequiredMixin, CreateView):
@@ -39,7 +55,7 @@ class AdvertPage(View):
     View for the advertisment page. It will render the page with:
     advertisment information;
     feedbacks;
-    form to feedbacks.
+    form to add feedbacks.
     """
     template_name = 'marketapp/advert.html'
     # TODO: Сделать Mixin для поиска объявлений, сделать рефакторинг

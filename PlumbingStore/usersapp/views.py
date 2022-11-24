@@ -1,8 +1,7 @@
-from django.contrib.auth import login, authenticate
 from django.views.generic import TemplateView, DetailView
 from django.views.generic.edit import CreateView
+from django.contrib.auth import login, authenticate
 from django.contrib.auth.mixins import LoginRequiredMixin
-
 from django.shortcuts import redirect
 
 from .forms import UserForm
@@ -10,8 +9,8 @@ from .models import User
 # TODO: Исправить баг со входом
 
 
-# User profile page
 class ProfileView(LoginRequiredMixin, DetailView):
+    """ User Profile Page"""
     model = User
     template_name = 'registration/profile.html'
     context_object_name = 'profile'
