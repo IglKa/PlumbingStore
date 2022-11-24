@@ -56,10 +56,9 @@ class AdvertPage(View):
     @method_decorator(login_required)
     def post(self, request, adv_pk):
         form = CreateFeedbackForm(self.request.POST)
-        user = self.request.user
         if form.is_valid():
             # Adding user who creates the form to it
-            form.instance.user = user
+            form.instance.user = self.request.user
             # Adding advertisment which feedback belongs to
             form.instance.advert = Advertisment.objects.get(pk=adv_pk)
             form.save()
