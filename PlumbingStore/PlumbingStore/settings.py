@@ -10,16 +10,10 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.1/ref/settings/
 """
 import os
-import sys
-
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-PROJECT_ROOT = os.path.dirname(__file__)
-
-sys.path.insert(0, os.path.join(PROJECT_ROOT, 'apps'))
-
+BASE_DIR = Path(__file__).resolve().parent.parent
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
@@ -31,9 +25,12 @@ SECRET_KEY = 'django-insecure-x+0k-7j7_9&5)@fw6c2nn%4gozuu4*mki_w+e6k&r1pqn#n((u
 DEBUG = True
 
 ALLOWED_HOSTS = []
+
 AUTH_USER_MODEL = 'usersapp.User'
-LOGIN_REDIRECT_URL = '/accounts/page'      #TODO:'marketplace/'
-LOGOUT_REDIRECT_URL = '/accounts/page'
+
+# Will redirect to homepage
+LOGIN_REDIRECT_URL = 'adverts/'
+LOGOUT_REDIRECT_URL = 'adverts/'
 
 # Application definition
 
@@ -44,6 +41,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
     'debug_toolbar',
     'usersapp',
     'marketapp',
@@ -66,7 +64,7 @@ TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [
-            os.path.join(PROJECT_ROOT, 'templates')
+            BASE_DIR / 'templates'
         ],
         'APP_DIRS': True,
         'OPTIONS': {
@@ -132,7 +130,12 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
 
-STATIC_URL = 'static/'
+STATIC_URL = '/static/'
+
+STATICFILES_DIRS = [
+    BASE_DIR/'static'
+]
+
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
