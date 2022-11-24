@@ -17,7 +17,7 @@
 {% endif %}
 
 {% for a in advert %}
-<a href="{% url 'marketapp:adv_det' a.pk %}">{{ a.title }}</a><br>
+<a href="{% url 'marketapp:advert_page' a.pk %}">{{ a.title }}</a><br>
 {% endfor %}
 
 {% endblock %}
