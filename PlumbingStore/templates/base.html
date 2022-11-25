@@ -31,7 +31,7 @@
 
     {% for a in advert %}
     <div>
-        <a href="{% url 'marketapp:advert_page' a.pk %}">
+        <a href="{% url 'marketapp:advert_page' a.URL %}">
             {{ a.image }}<br>
             {{ a.title }}<br>
             {{ a.description }}<br>

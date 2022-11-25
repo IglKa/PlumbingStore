@@ -14,7 +14,7 @@
 <br>
 <br>
 
-<form action="{% url 'marketapp:advert_page' advert.pk %}" method="post">
+<form action="{% url 'marketapp:advert_page' advert.slug %}" method="post">
     {{ form }}
     {% csrf_token %}
     <button type="submit">Submit</button>

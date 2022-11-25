@@ -47,11 +47,10 @@ class AdvertPage(View):
     form to add feedbacks.
     """
     template_name = 'marketapp/advert.html'
-    # TODO: Сделать Mixin для поиска объявлений, сделать рефакторинг
 
-    def get(self, request, adv_pk):
-        advert = Advertisment.objects.get(pk=adv_pk)
-        feedback = Feedback.objects.filter(advert=adv_pk)
+    def get(self, request, adv_slug):
+        advert = Advertisment.objects.get(slug=adv_slug)
+        feedback = Feedback.objects.filter(advert_slug=adv_slug)
         form = CreateFeedbackForm()
         return render(request, self.template_name, {'advert': advert,
                                                     'feedback': feedback,
@@ -59,13 +58,13 @@ class AdvertPage(View):
                       )
 
     @method_decorator(login_required)
-    def post(self, request, adv_pk):
+    def post(self, request, adv_slug):
         form = CreateFeedbackForm(self.request.POST)
         if form.is_valid():
             # Adding user who creates the form to it
             form.instance.user = self.request.user
             # Adding advertisment which feedback belongs to
-            form.instance.advert = Advertisment.objects.get(pk=adv_pk)
+            form.instance.advert = Advertisment.objects.get(slug=adv_slug)
             form.save()
             # Redirect to the same page
-            return HttpResponseRedirect(reverse('marketapp:advert_page', kwargs={'adv_pk': adv_pk}))
+            return HttpResponseRedirect(reverse('marketapp:advert_page', kwargs={'adv_slug': adv_slug}))
