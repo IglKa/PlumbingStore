@@ -11,30 +11,19 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from .models import Advertisment, Feedback
 from .forms import CreateFeedbackForm
 from usersapp.models import User
-
+from utils import AddContextMixin
 # TODO: РЕФАКТОРИНГ
 
 
-# TODO: relocate to utils.py
-# The <div> where all the links will be displayed
-menu_block = [
-    'Profile',
-    'My Store',
-    'Shopping Cart',
-    'Settings',
-]
-
-
-class MarketHome(ListView):
+class MarketHome(AddContextMixin, ListView):
     model = Advertisment
     template_name = 'base.html'
     context_object_name = 'advert'
 
-    def get_context_data(self, **kwargs):
-        """Adds menu in template"""
+    def get_context_data(self, *, object_list=None, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['menu'] = menu_block
-        return context
+        addable_context = self.add_context()
+        return dict(list(context.items()) + list(addable_context.items()))
 
 
 class CreateAdvert(LoginRequiredMixin, CreateView):

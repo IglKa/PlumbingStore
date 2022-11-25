@@ -16,6 +16,15 @@
         </div>
     </header>
 
+    <div>
+        {% for m in menu %}
+        <div>
+            <!--TODO: <a>-->
+            {{ m }}
+        </div>
+        {% endfor %}
+    </div>
+
     {% if user.is_authenticated %}
     <a href="{% url 'marketapp:create_adv' %}">Create Advert</a><br>
     {% endif %}

@@ -1,4 +1,5 @@
 from django.db import models
+from django.urls import reverse
 from django.utils import timezone
 from django.conf import settings
 
@@ -25,6 +26,9 @@ class Advertisment(models.Model):
                             unique=True,
                             db_index=True,
                             verbose_name='URL')
+
+    def get_absolute_url(self):
+        return reverse('marketapp:advert_page', kwargs={'pk': self.pk})
 
 
 class Feedback(models.Model):

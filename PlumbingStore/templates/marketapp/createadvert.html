@@ -5,11 +5,16 @@
 {% block content %}
 <form method="post" action="{% url 'marketapp:create_adv' %}">
     {% csrf_token %}
-    Category: {{ form.category }}<br>
-    Title: {{ form.title }}<br>
-    Description: {{ form.description }}<br>
-    Image: {{ form.image }}<br>
-    <button type="submit">Create</button>
+    <div>
+        <!-- TODO: При выборе категории появление поля цена-->
+        Category: {{ form.category }}<br>
+        Title: {{ form.title }}<br>
+        Description: {{ form.description }}<br>
+        Image: {{ form.image }}<br>
+    </div>
+    <div>
+        <button type="submit">Create</button>
+    </div>
 </form>
 
 
