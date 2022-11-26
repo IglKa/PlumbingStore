@@ -11,11 +11,6 @@ class Advertisment(models.Model):
         GOODS = 'GOODS', 'Товары'
         SERVICES = 'SERVICES', 'Услуги'
         VACANCY = 'VACANCY', 'Вакансия'
-        slug = models.SlugField(max_length=40,
-                                unique=False,
-                                db_index=True,
-                                verbose_name='URL'
-                                )
 
     category = models.CharField(max_length=40,
                                 choices=Category.choices,
