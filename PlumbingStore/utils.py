@@ -6,6 +6,16 @@ menu_block = [
     'Settings',
 ]
 
+# Will fill slug with the given content
+# TODO: Refactor
+def fill_slug(data):
+    slug = []
+    for i in data:
+        if data[i] == None:
+            data[i] = 'None'
+        slug.append(data[i])
+    return '-'.join(slug)
+
 
 class AddContextMixin:
     """The Mixin that adds all context needed for the site"""

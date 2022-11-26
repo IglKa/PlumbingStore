@@ -12,4 +12,4 @@ class AdvertAdmin(admin.ModelAdmin):
     list_display = ['category', 'user', 'title',
                     'description', 'date_posted', 'slug'
                     ]
-    prepopulated_fields = {'slug': ('category', 'title')}
+    # prepopulated_fields = {'slug': ('category', 'title')}

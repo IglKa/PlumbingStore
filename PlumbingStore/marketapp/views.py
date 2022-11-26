@@ -10,17 +10,19 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 
 from .models import Advertisment, Feedback
 from .forms import CreateFeedbackForm
-from utils import AddContextMixin
+from utils import AddContextMixin, fill_slug
 # TODO: РЕФАКТОРИНГ
 
 
 class MarketHome(AddContextMixin, ListView):
+    """Main Home Page"""
     model = Advertisment
     template_name = 'base.html'
     context_object_name = 'advert'
 
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super().get_context_data(**kwargs)
+        # Adding context from Mixin
         addable_context = self.add_context()
         return dict(list(context.items()) + list(addable_context.items()))
 
@@ -34,7 +36,9 @@ class CreateAdvert(LoginRequiredMixin, CreateView):
     success_url = reverse_lazy('marketapp:homepage')
 
     def form_valid(self, form):
+        # Adds User to Advertisment
         form.instance.user = self.request.user
+        form.instance.slug = fill_slug(form.cleaned_data)
         return super().form_valid(form)
 
 
@@ -60,10 +64,13 @@ class AdvertPage(View):
     def post(self, request, adv_slug):
         form = CreateFeedbackForm(self.request.POST)
         if form.is_valid():
-            # Adding user who creates the form to it
+            # Adding user who creates the form
             form.instance.user = self.request.user
             # Adding advertisment which feedback belongs to
             form.instance.advert = Advertisment.objects.get(slug=adv_slug)
             form.save()
             # Redirect to the same page
-            return HttpResponseRedirect(reverse('marketapp:advert_page', kwargs={'adv_slug': adv_slug}))
+            return HttpResponseRedirect(reverse('marketapp:advert_page',
+                                                kwargs={'adv_slug': adv_slug}
+                                                )
+                                        )
