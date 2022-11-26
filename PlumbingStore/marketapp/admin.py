@@ -10,6 +10,6 @@ admin.site.register(Feedback)
 @admin.register(Advertisment)
 class AdvertAdmin(admin.ModelAdmin):
     list_display = ['category', 'user', 'title',
-                    'description', 'date_posted'
+                    'description', 'date_posted', 'slug'
                     ]
-    prepopulated_fields = {'slug': ('title', 'category')}
+    prepopulated_fields = {'slug': ('category', 'title')}

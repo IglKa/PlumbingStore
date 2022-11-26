@@ -2,7 +2,7 @@ from django.views import View
 from django.views.generic import ListView
 from django.views.generic.edit import CreateView
 from django.http import HttpResponseRedirect
-from django.shortcuts import render, reverse
+from django.shortcuts import render, reverse, get_object_or_404
 from django.urls import reverse_lazy
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
@@ -10,7 +10,6 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 
 from .models import Advertisment, Feedback
 from .forms import CreateFeedbackForm
-from usersapp.models import User
 from utils import AddContextMixin
 # TODO: РЕФАКТОРИНГ
 
@@ -49,8 +48,8 @@ class AdvertPage(View):
     template_name = 'marketapp/advert.html'
 
     def get(self, request, adv_slug):
-        advert = Advertisment.objects.get(slug=adv_slug)
-        feedback = Feedback.objects.filter(advert_slug=adv_slug)
+        advert = get_object_or_404(Advertisment, slug=adv_slug)
+        feedback = Feedback.objects.filter(advert=advert)
         form = CreateFeedbackForm()
         return render(request, self.template_name, {'advert': advert,
                                                     'feedback': feedback,

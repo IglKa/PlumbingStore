@@ -19,7 +19,6 @@
     <div>
         {% for m in menu %}
         <div>
-            <!--TODO: <a>-->
             {{ m }}
         </div>
         {% endfor %}
@@ -31,7 +30,7 @@
 
     {% for a in advert %}
     <div>
-        <a href="{% url 'marketapp:advert_page' a.URL %}">
+        <a href="{% url 'marketapp:advert_page' a.slug %}">
             {{ a.image }}<br>
             {{ a.title }}<br>
             {{ a.description }}<br>
