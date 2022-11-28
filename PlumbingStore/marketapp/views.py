@@ -39,7 +39,7 @@ class CreateAdvert(LoginRequiredMixin, CreateView):
         # Adds User to Advertisment
         form.instance.user = self.request.user
         form.save(commit=False)
-        slug = SlugHandle(form, sep='-')
+        slug = SlugHandle(form)
         slug = slug.fill_slug()
         form.instance.slug = slug
         return super().form_valid(form)
