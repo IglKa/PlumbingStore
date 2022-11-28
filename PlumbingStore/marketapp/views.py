@@ -10,7 +10,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 
 from .models import Advertisment, Feedback
 from .forms import CreateFeedbackForm
-from utils import AddContextMixin, fill_slug
+from utils import AddContextMixin, SlugHandle
 # TODO: РЕФАКТОРИНГ
 
 
@@ -38,7 +38,10 @@ class CreateAdvert(LoginRequiredMixin, CreateView):
     def form_valid(self, form):
         # Adds User to Advertisment
         form.instance.user = self.request.user
-        form.instance.slug = fill_slug(form.cleaned_data)
+        form.save(commit=False)
+        slug = SlugHandle(form, sep='-')
+        slug = slug.fill_slug()
+        form.instance.slug = slug
         return super().form_valid(form)
 
 

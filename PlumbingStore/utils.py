@@ -1,3 +1,6 @@
+from django.utils import timezone
+
+
 # Menu block for templates
 menu_block = [
     'Profile',
@@ -6,15 +9,24 @@ menu_block = [
     'Settings',
 ]
 
-# Will fill slug with the given content
-# TODO: Refactor
-def fill_slug(data):
-    slug = []
-    for i in data:
-        if data[i] == None:
-            data[i] = 'None'
-        slug.append(data[i])
-    return '-'.join(slug)
+
+class SlugHandle:
+    """This will be an automatic slug maker.
+    As long as I want to build beautiful slugs
+    lately I would build my own package for it, but now
+    this what I have so  far. BTW this my first experience on working
+    with self-made classes that actually do some work.
+    """
+    no_no_symbols = ['@', '.', '/', '$', '#', '*', '+',
+                     '?', '%', '>', '<']
+
+    def __init__(self, form, **kwargs):
+        self.user = str(form.instance.user).translate({ord(i): None for i in self.no_no_symbols})
+        self.title = form.instance.title
+
+    def fill_slug(self):
+        slug = self.user + '-' + self.title
+        return slug.strip()
 
 
 class AddContextMixin:
