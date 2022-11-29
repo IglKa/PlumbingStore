@@ -11,7 +11,8 @@ menu_block = [
 
 
 class SlugHandle:
-    """This will be an automatic slug maker.
+    """
+    This will be an automatic slug maker.
     As long as I want to build beautiful slugs
     lately I would build my own package for it, but now
     this what I have so  far. BTW this my first experience on working
@@ -20,13 +21,14 @@ class SlugHandle:
     no_no_symbols = ['@', '.', '/', '$', '#', '*', '+',
                      '?', '%', '>', '<']
 
-    def __init__(self, form, **kwargs):
-        self.user = str(form.instance.user).translate({ord(i): None for i in self.no_no_symbols})
-        self.title = form.instance.title
+    def __init__(self, **kwargs):
+        self.user = str(kwargs['user'])
+        self.user = self.user[:self.user.find('@')]
+        self.title = kwargs['title'].capitalize().strip().replace(' ', '')
 
     def fill_slug(self):
         slug = self.user + '-' + self.title
-        return slug.strip()
+        return slug
 
 
 class AddContextMixin:
