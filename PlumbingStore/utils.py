@@ -22,9 +22,13 @@ class SlugHandle:
                      '?', '%', '>', '<']
 
     def __init__(self, **kwargs):
+        # TODO: Рассписать все возможные атрибуты
         self.user = str(kwargs['user'])
         self.user = self.user[:self.user.find('@')]
         self.title = kwargs['title'].capitalize().strip().replace(' ', '')
+
+    # TODO: def normalize_<self.<value>>(self, **kwargs):
+    #  will do all work like: translate ru-eng, strip, remove no_no_symbols
 
     def fill_slug(self):
         slug = self.user + '-' + self.title

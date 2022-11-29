@@ -10,7 +10,8 @@ class Advertisment(models.Model):
         SERVICES = 'SERVICES', 'Услуги'
         VACANCY = 'VACANCY', 'Вакансия'
 
-    category = models.CharField(max_length=40,
+    category = models.CharField(
+                                max_length=40,
                                 choices=Category.choices,
                                 default=Category.GOODS
                                 )
@@ -20,7 +21,8 @@ class Advertisment(models.Model):
     date_posted = models.DateTimeField(default=timezone.now)
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, null=True)
 
-    slug = models.SlugField(max_length=40,
+    slug = models.SlugField(
+                            max_length=100,
                             unique=True,
                             db_index=True,
                             verbose_name='URL'
