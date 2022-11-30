@@ -15,14 +15,18 @@ class SlugHandle:
     This will be an automatic slug maker.
     As long as I want to build beautiful slugs
     lately I would build my own package for it, but now
-    this what I have so  far. BTW this my first experience on working
-    with self-made classes that actually do some work.
+    this what I have so far.
+    BTW this my first experience on working
+    with self-made classes that actually do some work so don't be
+    so strict who is watching it :) .
     """
-    no_no_symbols = ['@', '.', '/', '$', '#', '*', '+',
+
+    forbidden_symbols = ['@', '.', '/', '$', '#', '*', '+',
                      '?', '%', '>', '<']
 
     # I will think on translatoins later, now my site is English only.
-    def __init__(self,
+    def __init__(
+                 self,
                  user=None,
                  title=None,
                  category=None,
@@ -33,12 +37,7 @@ class SlugHandle:
                  sep='-',
                  ):
 
-        # Checking if user is not str type and converting it, if it is
-        if isinstance(user, str) == False:
-            self.user = str(user)
-        else:
-            self.user = user
-
+        self.user = user
         self.title = title
         self.description = description
         self.category = category
@@ -47,14 +46,11 @@ class SlugHandle:
         self.lower = lower
         self.sep = sep
 
-    # TODO: def normalize_<self.<value>>(self, **kwargs):
-    #  will do all work like: translate ru-eng, strip, remove no_no_symbols
-
-    # def fill_slug(self):
-        # slug = self.user + '-' + self.title
-        # return slug
-
     def _normalize_user(self):
+        # Checking if user is str type
+        if isinstance(self.user, str) == False:
+            self.user = str(self.user)
+        self.user = self.user
         # Because I want my site to use email instead of usernames
         # we need to find '@' symbol and remove @email.com
         self.user = self.user[:self.user.find('@')]
@@ -68,6 +64,7 @@ class SlugHandle:
 
     def fill_slug(self):
         pass
+
 
 class AddContextMixin:
     """The Mixin that adds all context needed for the site"""
