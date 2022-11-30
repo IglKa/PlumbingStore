@@ -11,11 +11,11 @@ class Advertisment(models.Model):
         VACANCY = 'VACANCY', 'Вакансия'
 
     category = models.CharField(
-                                max_length=40,
+                                max_length=15,
                                 choices=Category.choices,
                                 default=Category.GOODS
                                 )
-    title = models.CharField(max_length=100)
+    title = models.CharField(max_length=150)
     description = models.TextField(max_length=5000)
     image = models.ImageField(blank=True)
     date_posted = models.DateTimeField(default=timezone.now)
