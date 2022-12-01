@@ -10,6 +10,15 @@ menu_block = [
 ]
 
 
+class AddContextMixin:
+    """The Mixin that adds all context needed for the site"""
+
+    def add_context(self, **kwargs):
+        context = kwargs
+        context['menu'] = menu_block
+        return context
+
+
 class SlugHandle:
     """
     This will be an automatic slug maker.
@@ -46,6 +55,7 @@ class SlugHandle:
         self.lower = lower
         self.sep = sep
 
+
     def _normalize_user(self):
         # Checking if user is str type
         if isinstance(self.user, str) == False:
@@ -63,13 +73,6 @@ class SlugHandle:
         return self.title
 
     def fill_slug(self):
-        pass
-
-
-class AddContextMixin:
-    """The Mixin that adds all context needed for the site"""
-
-    def add_context(self, **kwargs):
-        context = kwargs
-        context['menu'] = menu_block
-        return context
+        # Need to write checks for attributes if they are given or not.
+        # But now I don't really know how to do this
+        return self._normalize_user() + self.sep + self._normalize_title()
