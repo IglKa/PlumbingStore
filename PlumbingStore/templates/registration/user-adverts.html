@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+
+{% block title %}Your Adverts{% endblock %}
+
+
+{% block content %}
+
+<header>
+    <h1>{{user.email}}</h1>
+</header>
+
+{% for advert in object_list %}
+<div>
+    {{advert.image}}<br>
+    {{advert.title}}<br>
+    {{advert.description}}<br>
+</div>
+
+{% endfor %}
+
+{% endblock %}
