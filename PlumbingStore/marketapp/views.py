@@ -40,8 +40,7 @@ class CreateAdvert(LoginRequiredMixin, CreateView):
         form.instance.user = self.request.user
         form.save(commit=False)
         slug = SlugHandle(user=self.request.user, title=form.instance.title)
-        slug = slug.fill_slug()
-        form.instance.slug = slug
+        form.instance.slug = slug.fill_slug()
         return super().form_valid(form)
 
 
