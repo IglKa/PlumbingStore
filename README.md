@@ -1,9 +1,15 @@
 # PlumbingStore
-Магазин сантехники Самара 24/7.
+Plumbing shop Samara 24/7.
 
-Лучший маркетплейс для товаров и услуг в сфере сантехники по Самаре и миру в целом!
+The best marketplace for goods and services in the field of plumbing in Samara and the world as a whole!
 
-Девиз: "Если некуда вам срать, заходите на наш сайт. Тут найдётся туалет, ванна, душ, услуги есть.
-Коль хотите вы работать, с голоду не протянуть ноги, забегайте тоже к нам, тут есть всё. Наш сайт - амбал!".
+Slogan: 'Everything for purity of your ass'.
 
-Cannot write down something here. Will write here later. All I can say is that is my best project rn. I would comeback to it afetr years to check how far I come from this. :)
+
+Little doc:
+
+  -usersapp: here response for everything that related to account, user, registration and all.
+  -settingsapp: will be a place for all settings of the site that user can change.
+  -marketapp: main app where all processes like create advertisment and send feedback is processing.
+  -shopapp: I don't really know, but mb I will merge it into marketapp, cuz it might actually do same logic.
+
