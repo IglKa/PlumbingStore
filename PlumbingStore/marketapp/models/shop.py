@@ -1,4 +1,5 @@
 from django.db import models
+from django.utils import timezone
 
 
 class Company(models.Model):
@@ -12,6 +13,7 @@ class Company(models.Model):
     descr = models.TextField(max_length=5000, blank=False)
     header_image = models.ImageField(blank=True)
     profile_image = models.ImageField(blank=True)
+    date_created = models.DateTimeField(default=timezone.now)
 
     category = models.CharField(max_length=10,
                                 choices=Category.choices,

@@ -1,5 +1,5 @@
 from django.views import View
-from django.views.generic import ListView
+from django.views.generic import ListView, DetailView
 from django.views.generic.edit import CreateView
 from django.http import HttpResponseRedirect
 from django.shortcuts import render, reverse, get_object_or_404
