@@ -1,5 +1,5 @@
 from django.views import View
-from django.views.generic import ListView, DetailView
+from django.views.generic import DetailView
 from django.views.generic.edit import CreateView
 from django.http import HttpResponseRedirect
 from django.shortcuts import render, reverse, get_object_or_404
@@ -8,23 +8,9 @@ from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
 from django.contrib.auth.mixins import LoginRequiredMixin
 
-from .models import Advertisment, Feedback, Company
-from .forms import CreateFeedbackForm
-from utils import AddContextMixin, SlugHandle
-# TODO: РЕФАКТОРИНГ
-
-
-class MarketHome(AddContextMixin, ListView):
-    """Main Home Page"""
-    model = Advertisment
-    template_name = 'base.html'
-    context_object_name = 'advert'
-
-    def get_context_data(self, *, object_list=None, **kwargs):
-        context = super().get_context_data(**kwargs)
-        # Adding context from Mixin
-        addable_context = self.add_context()
-        return dict(list(context.items()) + list(addable_context.items()))
+from marketapp.models import Advertisment, Feedback, Company
+from marketapp.forms import CreateFeedbackForm
+from .. .utils import utils
 
 
 class CreateAdvert(LoginRequiredMixin, CreateView):
@@ -44,6 +30,7 @@ class CreateAdvert(LoginRequiredMixin, CreateView):
         return super().form_valid(form)
 
 
+# TODO: Refactor - class AdvertPage(SingleObjectMixin, DetailView)
 class AdvertPage(View):
     """
     View for the advertisment page. It will render the page with:

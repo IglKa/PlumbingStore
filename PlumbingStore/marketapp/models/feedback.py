@@ -2,7 +2,7 @@ from django.db import models
 from django.utils import timezone
 
 from .advert import Advertisment
-from .shop import Company
+from .company import Company
 
 
 class Feedback(models.Model):
