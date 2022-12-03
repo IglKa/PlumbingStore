@@ -30,11 +30,3 @@ class Advertisment(models.Model):
 
     def get_absolute_url(self):
         return reverse('adverts/', kwargs={'adv_slug': self.slug})
-
-
-class Feedback(models.Model):
-    user = models.ForeignKey('usersapp.User', on_delete=models.CASCADE, null=True)
-    advert = models.ForeignKey(Advertisment, on_delete=models.CASCADE, null=False)
-    text = models.TextField(max_length=5000)
-    image = models.ImageField(blank=True)
-    date_posted = models.DateTimeField(default=timezone.now)

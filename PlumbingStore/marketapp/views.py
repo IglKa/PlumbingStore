@@ -8,7 +8,7 @@ from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
 from django.contrib.auth.mixins import LoginRequiredMixin
 
-from .models import Advertisment, Feedback
+from .models import Advertisment, Feedback, Company
 from .forms import CreateFeedbackForm
 from utils import AddContextMixin, SlugHandle
 # TODO: РЕФАКТОРИНГ
@@ -76,3 +76,9 @@ class AdvertPage(View):
                                                 kwargs={'adv_slug': adv_slug}
                                                 )
                                         )
+
+
+class CompanyDetail(DetailView):
+    model = Company
+    template_name = 'shopapp/company.html'
+    context_object_name = 'company'

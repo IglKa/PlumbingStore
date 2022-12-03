@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     {% load static %}
     <link type="text/css" href="{% static 'marketapp/css/mainpage.css' %}" rel="stylesheet">
-    <title>{% block title %}base{% endblock %}</title>
+    <title>{% block title %}PlumbingStore | Main page{% endblock %}</title>
 </head>
 
 <body>
@@ -15,15 +15,17 @@
         <div>
             <h1>Marketplace</h1><br>
         </div>
-    </header>
 
-    <div>
+        <div>
         {% for m in menu %}
         <div>
             {{ m }}
         </div>
         {% endfor %}
     </div>
+    </header>
+
+
 
     {% if user.is_authenticated %}
     <a href="{% url 'marketapp:create_adv' %}">Create Advert</a><br>

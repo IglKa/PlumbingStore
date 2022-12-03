@@ -9,5 +9,7 @@ urlpatterns = [
 
     path('<slug:adv_slug>', AdvertPage.as_view(), name='advert_page'),
 
-    path('create/', CreateAdvert.as_view(), name='create_adv')
+    path('create/', CreateAdvert.as_view(), name='create_adv'),
+
+    path('<slug:slug>', CompanyDetail.as_view(), name='company'),
 ]
