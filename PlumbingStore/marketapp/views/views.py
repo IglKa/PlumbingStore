@@ -10,7 +10,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 
 from marketapp.models import Advertisment, Feedback, Company
 from marketapp.forms import CreateFeedbackForm
-from .. .utils import utils
+import utils
 
 
 class CreateAdvert(LoginRequiredMixin, CreateView):
@@ -25,8 +25,8 @@ class CreateAdvert(LoginRequiredMixin, CreateView):
         # Adds User to Advertisment
         form.instance.user = self.request.user
         form.save(commit=False)
-        slug = SlugHandle(user=self.request.user, title=form.instance.title)
-        form.instance.slug = slug.fill_slug()
+        slug = utils.SlugHandle(user=self.request.user, title=form.instance.title)
+        form.instance.slug = utils.slug.fill_slug()
         return super().form_valid(form)
 
 
