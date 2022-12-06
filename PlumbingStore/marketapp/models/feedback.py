@@ -1,4 +1,5 @@
 from django.db import models
+from django.urls import reverse
 from django.utils import timezone
 
 from .advert import Advertisment
@@ -14,3 +15,7 @@ class Feedback(models.Model):
     text = models.TextField(max_length=5000)
     image = models.ImageField(blank=True)
     date_posted = models.DateTimeField(default=timezone.now)
+
+    def get_absolute_url(self):
+        advert = Advertisment.objects.get(self.advert)
+        return reverse('marketapp:advert_page', kwargs={'slug': advert.slug})

@@ -29,4 +29,4 @@ class Advertisment(models.Model):
                             )
 
     def get_absolute_url(self):
-        return reverse('', kwargs={'adv_slug': self.slug})
+        return reverse('marketapp:advert_page', kwargs={'slug': self.slug})
