@@ -11,5 +11,5 @@ urlpatterns = [
 
     path('create/', CreateAdvert.as_view(), name='create_adv'),
 
-    path('<slug:slug>', CompanyDetail.as_view(), name='company'),
+    path('company/<slug:slug>', CompanyDetail.as_view(), name='company'),
 ]

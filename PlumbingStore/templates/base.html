@@ -13,21 +13,19 @@
 
     <header>
         <div>
-            <div>
-                <h3><a class="profile-menu" href="{% url 'usersapp:profile' user.pk %}">Profile</a></h3>
-            </div>
-            <div>
-                {% if user.is_authenticated %}
-                <h3><a class="create-menu" href="{% url 'marketapp:create_adv' %}">Create Advert</a></h3>
-                {% endif %}
-            </div>
+            <h3><a class="profile-menu" href="{% url 'usersapp:profile' user.pk %}">Profile</a></h3>
+            {% if user.is_authenticated %}
+            <h3><a class="create-menu" href="{% url 'marketapp:create_adv' %}">Create Advert</a></h3>
+            {% endif %}
         </div>
 
         <div>
             <h1>Marketplace</h1><br>
         </div>
+
         <hr>
 
+        
         <hr>
     </header>
 

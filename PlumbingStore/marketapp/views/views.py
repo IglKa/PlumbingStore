@@ -26,7 +26,7 @@ class CreateAdvert(LoginRequiredMixin, CreateView):
         form.instance.user = self.request.user
         form.save(commit=False)
         slug = utils.SlugHandle(user=self.request.user, title=form.instance.title)
-        form.instance.slug = utils.slug.fill_slug()
+        form.instance.slug = slug.fill_slug()
         return super().form_valid(form)
 
 
@@ -67,5 +67,5 @@ class AdvertPage(View):
 
 class CompanyDetail(DetailView):
     model = Company
-    template_name = 'shopapp/company.html'
+    template_name = 'marketapp/company.html'
     context_object_name = 'company'
