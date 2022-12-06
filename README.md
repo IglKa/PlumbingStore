@@ -9,7 +9,9 @@ Slogan: 'Everything for purity of your ass'.
 Little doc:
 
   -usersapp: here response for everything that related to account, user, registration and all.
+  
   -settingsapp: will be a place for all settings of the site that user can change.
+  
   -marketapp: main app where all processes like create advertisment and send feedback is processing. Also it 
               provides logic for company page.
 
