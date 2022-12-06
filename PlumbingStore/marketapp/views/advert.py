@@ -1,7 +1,10 @@
-from django.views.generic.detail import SingleObjectMixin
+from django.views import View
 from django.views.generic.edit import CreateView
-from django.shortcuts import reverse
+from django.http import HttpResponseRedirect
+from django.shortcuts import render, reverse, get_object_or_404
 from django.urls import reverse_lazy
+from django.contrib.auth.decorators import login_required
+from django.utils.decorators import method_decorator
 from django.contrib.auth.mixins import LoginRequiredMixin
 
 from marketapp.models import Advertisment, Feedback, Company
@@ -26,7 +29,8 @@ class CreateAdvert(LoginRequiredMixin, CreateView):
         return super().form_valid(form)
 
 
-class AdvertPage(CreateView, SingleObjectMixin):
+# TODO: Refactor - class AdvertPage(SingleObjectMixin, DetailView)
+class AdvertPage(View):
     """
     View for the advertisment page. It will render the page with:
     advertisment information;
@@ -34,20 +38,27 @@ class AdvertPage(CreateView, SingleObjectMixin):
     form to add feedbacks.
     """
     template_name = 'marketapp/advert.html'
-    form_class = CreateFeedbackForm
 
-    def get(self, request, slug, *args, **kwargs):
-        self.obj = super().get_object(queryset=Advertisment.objects.filter(slug=slug))
-        return super().get(request, *args, **kwargs)
+    def get(self, request, adv_slug):
+        advert = get_object_or_404(Advertisment, slug=adv_slug)
+        feedback = Feedback.objects.filter(advert=advert)
+        form = CreateFeedbackForm()
+        return render(request, self.template_name, {'advert': advert,
+                                                    'feedback': feedback,
+                                                    'form': form}
+                      )
 
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['form'] = self.form_class
-        context['advert'] = self.obj
-        context['feedback'] = Feedback.objects.filter(advert=self.obj)
-        return context
-
-    def form_valid(self, form):
-        form.instance.user = self.request.user
-        form.instance.advert = self.model
-        return super().form_valid(form)
+    @method_decorator(login_required)
+    def post(self, request, adv_slug):
+        form = CreateFeedbackForm(self.request.POST)
+        if form.is_valid():
+            # Adding user who creates the form
+            form.instance.user = self.request.user
+            # Adding advertisment which feedback belongs to
+            form.instance.advert = Advertisment.objects.get(slug=adv_slug)
+            form.save()
+            # Redirect to the same page
+            return HttpResponseRedirect(reverse('marketapp:advert_page',
+                                                kwargs={'adv_slug': adv_slug}
+                                                )
+                                        )
