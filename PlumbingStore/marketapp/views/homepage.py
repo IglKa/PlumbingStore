@@ -3,6 +3,7 @@ from django.views.generic import ListView
 from marketapp.models import Advertisment
 import utils
 
+
 class MarketHome(utils.AddContextMixin, ListView):
     """Main Home Page"""
     model = Advertisment

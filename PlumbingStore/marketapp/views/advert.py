@@ -1,5 +1,4 @@
 from django.views import View
-from django.views.generic import DetailView
 from django.views.generic.edit import CreateView
 from django.http import HttpResponseRedirect
 from django.shortcuts import render, reverse, get_object_or_404
@@ -63,9 +62,3 @@ class AdvertPage(View):
                                                 kwargs={'adv_slug': adv_slug}
                                                 )
                                         )
-
-
-class CompanyDetail(DetailView):
-    model = Company
-    template_name = 'marketapp/company.html'
-    context_object_name = 'company'

@@ -2,6 +2,7 @@ from django.utils import timezone
 
 
 # Menu block for templates
+# TODO: Rethink what to do with it
 menu_block = [
     'Profile',
     'My Store',
@@ -19,6 +20,7 @@ class AddContextMixin:
         return context
 
 
+# TODO: rethink what to do with that and rid off of this tinki-winki ass-shit
 class SlugHandle:
     """
     This will be an automatic slug maker.

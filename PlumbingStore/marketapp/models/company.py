@@ -1,4 +1,5 @@
 from django.db import models
+from django.urls import reverse
 from django.utils import timezone
 
 
@@ -25,3 +26,6 @@ class Company(models.Model):
                             db_index=True,
                             verbose_name='URL'
                             )
+
+    def get_absolute_url(self):
+        return reverse('marketapp:company', kwargs={'slug': self.slug})
