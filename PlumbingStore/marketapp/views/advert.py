@@ -1,4 +1,4 @@
-from django.views.generic.detail import SingleObjectMixin
+from django.views.generic import DetailView
 from django.views.generic.edit import CreateView
 from django.urls import reverse_lazy
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -25,8 +25,7 @@ class CreateAdvert(LoginRequiredMixin, CreateView):
         return super().form_valid(form)
 
 
-# TODO: Refactor - class AdvertPage(SingleObjectMixin, DetailView)
-class AdvertPage(CreateView, SingleObjectMixin):
+class AdvertPage(CreateView, DetailView):
     """
     View for the advertisment page. It will render the page with:
     advertisment information;
@@ -37,17 +36,17 @@ class AdvertPage(CreateView, SingleObjectMixin):
     form_class = CreateFeedbackForm
 
     def get(self, request, slug, *args, **kwargs):
-        self.obj = super().get_object(queryset=Advertisment.objects.filter(slug=slug))
-        return super().get(request, *args, **kwargs)
+        self.object = super().get_object(queryset=Advertisment.objects.filter(slug=slug))
+        return super().get(request, slug, *args, **kwargs)
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['form'] = self.form_class
-        context['advert'] = self.obj
-        context['feedback'] = Feedback.objects.filter(advert=self.obj)
+        context['advert'] = self.object
+        context['feedback'] = Feedback.objects.filter(advert=self.object)
         return context
 
-    def form_valid(self, form):
+    def form_valid(self, form, **kwargs):
         form.instance.user = self.request.user
-        form.instance.advert = self.model
+        form.instance.advert = self.object.slug
         return super().form_valid(form)
