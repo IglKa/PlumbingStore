@@ -9,10 +9,7 @@ from marketapp.forms import CreateFeedbackForm
 
 
 class AdvertPage(LoginRequiredMixin, View):
-    """
-    Advertisment page view for rendering the advert detail
-    and feedbacks to it with the form to create them.
-    """
+
 
     template_name = 'marketapp/advert.html'
 
