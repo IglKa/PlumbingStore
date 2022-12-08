@@ -9,14 +9,12 @@ from marketapp.forms import CreateFeedbackForm
 
 
 class AdvertPage(LoginRequiredMixin, View):
-
-
     template_name = 'marketapp/advert.html'
 
     def get(self, request, slug):
-        advert = get_object_or_404(Advertisment, slug=slug)
-        feedback = Feedback.objects.filter(advert=advert)
-        return render(request, self.template_name, {'advert': advert,
+        self.advert = get_object_or_404(Advertisment, slug=slug)
+        feedback = Feedback.objects.filter(advert=self.advert)
+        return render(request, self.template_name, {'advert': self.advert,
                                                     'feedback': feedback,
                                                     'form': CreateFeedbackForm()}
                       )
