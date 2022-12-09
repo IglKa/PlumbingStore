@@ -20,7 +20,7 @@
     <button type="submit">Submit</button>
 </form>
 
-{% for f in feedback %}
+{% for f in object_list %}
 <div>
     {{ f.user }}<br>
     {{ f.text }}<br>

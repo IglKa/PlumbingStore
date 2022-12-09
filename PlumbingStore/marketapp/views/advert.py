@@ -1,34 +1,49 @@
-from django.http import HttpResponseRedirect
-from django.shortcuts import get_object_or_404, render
 from django.views import View
 from django.urls import reverse
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.views.generic import ListView, CreateView
+from django.views.generic.detail import SingleObjectMixin
 
 from marketapp.models import Advertisment, Feedback, Company
 from marketapp.forms import CreateFeedbackForm
 
 
-class AdvertPage(LoginRequiredMixin, View):
+class AdvertContextView(SingleObjectMixin, ListView):
     template_name = 'marketapp/advert.html'
 
-    def get(self, request, slug):
-        self.advert = get_object_or_404(Advertisment, slug=slug)
-        feedback = Feedback.objects.filter(advert=self.advert)
-        return render(request, self.template_name, {'advert': self.advert,
-                                                    'feedback': feedback,
-                                                    'form': CreateFeedbackForm()}
-                      )
+    def get(self, request, *args, **kwargs):
+        self.object = self.get_object(queryset=Advertisment.objects.all())
+        return super().get(request, *args, **kwargs)
 
-    def post(self, request, slug):
-        form = CreateFeedbackForm(self.request.POST)
-        if form.is_valid():
-            # Adding user who creates the form
-            form.instance.user = self.request.user
-            # Adding advertisment which feedback belongs to
-            form.instance.advert = Advertisment.objects.get(slug=slug)
-            form.save()
-            # Redirect to the same page
-            return HttpResponseRedirect(reverse('marketapp:advert_page',
-                                                kwargs={'slug': slug}
-                                                )
-                                        )
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['advert'] = self.object
+        context['form'] = CreateFeedbackForm()
+        return context
+
+    def get_queryset(self):
+        return self.object.feedback_set.all()
+
+
+class CreateFeedbackView(LoginRequiredMixin, CreateView):
+    model = Feedback
+    form_class = CreateFeedbackForm
+    template_name = 'marketapp/advert.html'
+
+    def form_valid(self, form, **kwargs):
+        form.instance.user = self.request.user
+        form.instance.advert = Advertisment.objects.get(slug=self.kwargs.get('slug'))
+        return super().form_valid(form)
+
+    def get_success_url(self):
+        return reverse('marketapp:advert_page', kwargs={'slug': self.kwargs.get('slug')})
+
+
+class AdvertPage(View):
+    def get(self, request, *args, **kwargs):
+        view = AdvertContextView.as_view()
+        return view(request, *args, **kwargs)
+
+    def post(self, request, *args, **kwargs):
+        view = CreateFeedbackView.as_view()
+        return view(request, *args, **kwargs)
