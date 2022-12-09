@@ -2,12 +2,13 @@ from django.utils import timezone
 
 
 # Menu block for templates
-# TODO: Rethink what to do with it
 menu_block = [
-    'Profile',
-    'My Store',
-    'Shopping Cart',
-    'Settings',
+    # Userapp logic
+    {'title': 'login', 'url_name': 'login'},
+    {'title': 'logout', 'url_name': 'logout'},
+    {'title': 'register', 'url_name': 'registration'},
+    # Other logic
+    {'title': 'Settings', 'url_name': 'settings'},
 ]
 
 
@@ -33,7 +34,7 @@ class SlugHandle:
     """
 
     forbidden_symbols = ['@', '.', '/', '$', '#', '*', '+',
-                     '?', '%', '>', '<']
+                         '?', '%', '>', '<']
 
     # I will think on translatoins later, now my site is English only.
     def __init__(

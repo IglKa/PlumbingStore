@@ -6,13 +6,14 @@ from django.views.generic.detail import SingleObjectMixin
 
 from marketapp.models import Advertisment, Feedback, Company
 from marketapp.forms import CreateFeedbackForm
+from utils import AddContextMixin
 # I had to separate class AdvertPage(SingleObjectMixin, CreateView):
 # Because this implementation was causing a lot of problems.
-# Now the problem is, that this code is giving SQLquery for each author of comment .
+# Now the problem is, that this code is giving SQLqueries for each author of comment .
 # TODO: Refactor
 
 
-class AdvertContextView(SingleObjectMixin, ListView):
+class AdvertContextView(AddContextMixin, SingleObjectMixin, ListView):
     """Will searsh for context to advert page"""
     template_name = 'marketapp/advert.html'
 
@@ -25,6 +26,7 @@ class AdvertContextView(SingleObjectMixin, ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['advert'] = self.object
+        context['menu'] = self.add_context()
         context['form'] = CreateFeedbackForm()
         return context
 

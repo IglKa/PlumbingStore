@@ -12,12 +12,7 @@
     {% block content %}
 
     <header>
-        <div>
-            <h3><a class="profile-menu" href="{% url 'usersapp:profile' user.pk %}">Profile</a></h3>
-            {% if user.is_authenticated %}
-            <h3><a class="create-menu" href="{% url 'marketapp:create_adv' %}">Create Advert</a></h3>
-            {% endif %}
-        </div>
+
 
         <div>
             <h1>Marketplace</h1><br>
@@ -41,5 +36,18 @@
     {% endfor %}
 
     {% endblock %}
+    <br>
+    <br>
+    <br>
+
+<div>
+    {% for m in menu %}
+        {% if not forloop.last %}
+            <li><a href="{% url m.url_name %}">{{ m.title }}</a></li>
+        {% else %}
+            <a href="{% url m.url_name %}">{{m.title}}</a>
+        {% endif %}
+    {% endfor %}
+</div>
 </body>
 </html>
