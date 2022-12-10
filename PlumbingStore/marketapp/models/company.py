@@ -16,12 +16,14 @@ class Company(models.Model):
     profile_image = models.ImageField(blank=True)
     date_created = models.DateTimeField(default=timezone.now)
 
-    category = models.CharField(max_length=10,
+    category = models.CharField(
+                                max_length=10,
                                 choices=Category.choices,
                                 default=Category.SHOP
                                 )
 
-    slug = models.SlugField(max_length=100,
+    slug = models.SlugField(
+                            max_length=100,
                             unique=True,
                             db_index=True,
                             verbose_name='URL'

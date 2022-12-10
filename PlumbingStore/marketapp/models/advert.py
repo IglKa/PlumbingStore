@@ -1,7 +1,8 @@
-from django.conf import settings
 from django.db import models
 from django.urls import reverse
 from django.utils import timezone
+
+from .company import Company
 
 
 class Advertisment(models.Model):
@@ -19,7 +20,7 @@ class Advertisment(models.Model):
     description = models.TextField(max_length=5000)
     image = models.ImageField(blank=True)
     date_posted = models.DateTimeField(default=timezone.now)
-    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, null=True)
+    company = models.ForeignKey(Company, on_delete=models.CASCADE, null=True)
 
     slug = models.SlugField(
                             max_length=100,
@@ -29,4 +30,4 @@ class Advertisment(models.Model):
                             )
 
     def get_absolute_url(self):
-        return reverse('marketapp:advert_page', kwargs={'slug': self.slug})
+        return reverse('marketapp:advert_page', kwargs={'slug': self.company})
