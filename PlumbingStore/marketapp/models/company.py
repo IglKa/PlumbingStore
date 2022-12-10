@@ -9,7 +9,9 @@ class Company(models.Model):
         STARTUP = 'STARTUP', 'Startup'
         BUSINESS = 'BUSINESS', 'Business'
 
-    holder = models.ForeignKey('usersapp.User', on_delete=models.CASCADE, null=True)
+    holder = models.ForeignKey('usersapp.User', on_delete=models.CASCADE,
+                               null=True, related_name='holder'
+                               )
     name = models.CharField(max_length=50, blank=False)
     descr = models.TextField(max_length=5000, blank=False)
     header_image = models.ImageField(blank=True)
@@ -31,3 +33,6 @@ class Company(models.Model):
 
     def get_absolute_url(self):
         return reverse('marketapp:company', kwargs={'slug': self.slug})
+
+    def __str__(self):
+        return self.slug

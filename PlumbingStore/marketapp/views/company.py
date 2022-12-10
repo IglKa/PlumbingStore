@@ -55,7 +55,7 @@ class CreateAdvert(LoginRequiredMixin, CreateView):
 
     def form_valid(self, form):
         form.instance.user = self.request.user
-        # form.instance.company = self.object.slug
+        form.instance.company = self.kwargs.get('slug')
         slug = utils.SlugHandle(user=self.request.user, title=form.instance.title)
         form.instance.slug = slug.fill_slug()
         return super().form_valid(form)
