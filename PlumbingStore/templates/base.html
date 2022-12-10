@@ -7,23 +7,15 @@
     <link type="text/css" href="{% static 'marketapp/css/mainpage.css' %}" rel="stylesheet">
     <title>{% block title %}PlumbingStore | Main page{% endblock %}</title>
 </head>
-
 <body>
     {% block content %}
-
     <header>
-
-
         <div>
             <h1>Marketplace</h1><br>
         </div>
-
         <hr>
-
-        
         <hr>
     </header>
-
     {% for a in advert %}
     <div>
         <a href="{% url 'marketapp:advert_page' a.slug %}">
@@ -32,22 +24,10 @@
             {{ a.description }}<br>
         </a>
     </div>
-
     {% endfor %}
-
     {% endblock %}
     <br>
     <br>
     <br>
-
-<div>
-    {% for m in menu %}
-        {% if not forloop.last %}
-            <li><a href="{% url m.url_name %}">{{ m.title }}</a></li>
-        {% else %}
-            <a href="{% url m.url_name %}">{{m.title}}</a>
-        {% endif %}
-    {% endfor %}
-</div>
 </body>
 </html>

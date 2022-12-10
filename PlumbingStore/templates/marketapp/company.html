@@ -4,7 +4,25 @@
 {% block title %}{{company.name}}{% endblock %}
 
 {% block content %}
-<h1>{{company.name}}</h1><br>
-{{company.descr}}
+<div>
+    <h1>{{company.name}}</h1>
+</div>
+<hr>
+<div>
+    <h3>{{company.descr}}</h3>
+</div>
+<hr>
+<div>
+    <form href="{% url 'marketapp:company' company.slug %}" method="post">
+        {% csrf_token %}
+        {% for f in form %}
+        <div>
+            {{f}}
+        </div>
+        {% endfor %}
+        <button type="submit">Create</button>
+    </form>
+</div>
+<br>
 
 {% endblock %}

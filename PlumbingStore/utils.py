@@ -7,8 +7,9 @@ menu_block = [
     {'title': 'login', 'url_name': 'login'},
     {'title': 'logout', 'url_name': 'logout'},
     {'title': 'register', 'url_name': 'registration'},
-    # Other logic
-    {'title': 'Settings', 'url_name': 'settings'},
+    # Marketapp logic
+    {'title': 'My Company', 'url_name': ''},
+    # {'title': 'Settings', 'url_name': 'settings'},
 ]
 
 
@@ -37,27 +38,9 @@ class SlugHandle:
                          '?', '%', '>', '<']
 
     # I will think on translatoins later, now my site is English only.
-    def __init__(
-                 self,
-                 user=None,
-                 title=None,
-                 category=None,
-                 description=None,
-                 capitalize=False,
-                 upper=False,
-                 lower=True,
-                 sep='-',
-                 ):
-
-        self.user = user
-        self.title = title
-        self.description = description
-        self.category = category
-        self.capitalize = capitalize
-        self.upper = upper
-        self.lower = lower
-        self.sep = sep
-
+    def __init__(self, *args):
+        for value in args:
+            setattr(self, value, value)
 
     def _normalize_user(self):
         # Checking if user is str type
