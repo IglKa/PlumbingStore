@@ -33,10 +33,19 @@ class SlugHandle:
     forbidden_symbols = ['@', '.', '/', '$', '#', '*', '+',
                          '?', '%', '>', '<']
 
-    # I will think on translatoins later, now my site is English only.
-    def __init__(self, *args):
-        for value in args:
-            setattr(self, value, value)
+    def __init__(self, **kwargs):
+        self.kwargs = {}
+        for key, value in kwargs:
+            self.kwargs = self.kwargs | dict(key, value)
+
+        self.sep = getattr(self, 'sep', default='-')
+        self.low = getattr(self, 'low', default=True)
+        self.upp = getattr(self, 'upp', default=False)
+        # If user is given setting it as attr
+        if user in kwargs:
+            setattr(self, 'user', user)
+        else:
+            pass
 
     def _normalize_user(self):
         # Checking if user is str type
@@ -47,12 +56,6 @@ class SlugHandle:
         # we need to find '@' symbol and remove @email.com
         self.user = self.user[:self.user.find('@')]
         return self.user
-
-    def _normalize_title(self):
-        # Removing all spaces from title
-        while ' ' in self.title:
-            self.title = self.title.replace(' ', '')
-        return self.title
 
     def fill_slug(self):
         # Need to write checks for attributes if they are given or not.
