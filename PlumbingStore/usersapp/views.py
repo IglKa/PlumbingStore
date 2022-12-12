@@ -45,7 +45,7 @@ class TemplateView(TemplateView):
 class UserCreation(CreateView):
     template_name = 'registration/registration.html'
     form_class = UserForm
-    success_url = '/'
+    success_url = 'marketapp:homepage'
 
     def form_valid(self, form):
         form.save()

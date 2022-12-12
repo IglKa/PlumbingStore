@@ -56,6 +56,8 @@ class CreateAdvert(LoginRequiredMixin, CreateView):
     def form_valid(self, form):
         form.instance.user = self.request.user
         form.instance.company = self.kwargs.get('slug')
+        # Need to do something with this, but I really don't know.
+        # Might try to do it as Custom Field.
         slug = utils.SlugHandle(user=self.request.user, title=form.instance.title)
         form.instance.slug = slug.fill_slug()
         return super().form_valid(form)

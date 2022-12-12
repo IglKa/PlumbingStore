@@ -29,5 +29,14 @@
     <br>
     <br>
     <br>
+    <div>
+        {% for m in menu %}
+            {% if not forloop.last %}
+                <a href="{% url m.url_name %}">{{ m.title }}</a>
+            {% else %}
+                <a href="{% url m.url_name %}">{{m.title}}</a>
+            {% endif %}
+        {% endfor %}
+    </div>
 </body>
 </html>
