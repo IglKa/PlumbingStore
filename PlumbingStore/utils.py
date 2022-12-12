@@ -2,14 +2,10 @@ from django.utils import timezone
 
 
 # Menu block for templates
+# TODO: Think better on functional that menu block will provide
 menu_block = [
-    # Userapp logic
-    {'title': 'login', 'url_name': 'usersapp:login'},
-    {'title': 'logout', 'url_name': 'usersapp:logout'},
-    {'title': 'register', 'url_name': 'usersapp:registration'},
-    # Marketapp logic
-    # {'title': 'My Company', 'url_name': ''},
-    # {'title': 'Settings', 'url_name': 'settings'},
+    # Settings
+    # {'title': 'Settings', 'url_name': 'settingsapp:mainmenu'},
 ]
 
 

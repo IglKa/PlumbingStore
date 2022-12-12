@@ -8,35 +8,45 @@
     <title>{% block title %}PlumbingStore | Main page{% endblock %}</title>
 </head>
 <body>
-    {% block content %}
-    <header>
+    {% block menu %}
         <div>
-            <h1>Marketplace</h1><br>
-        </div>
-        <hr>
-        <hr>
-    </header>
-    {% for a in advert %}
-    <div>
-        <a href="{% url 'marketapp:advert_page' a.slug %}">
-            {{ a.image }}<br>
-            {{ a.title }}<br>
-            {{ a.description }}<br>
-        </a>
-    </div>
-    {% endfor %}
-    {% endblock %}
-    <br>
-    <br>
-    <br>
-    <div>
-        {% for m in menu %}
-            {% if not forloop.last %}
-                <a href="{% url m.url_name %}">{{ m.title }}</a>
+            {% if user.is_authenticated %}
+                <a href="{% url 'usersapp:logout' %}">Logout</a>
+                {% for m in menu %}
+                    {% if not forloop.last %}
+                        <a href="{% url m.url_name %}">{{ m.title }}</a>
+                    {% else %}
+                        <a href="#"></a>
+                    {% endif %}
+                {% endfor %}
             {% else %}
-                <a href="{% url m.url_name %}">{{m.title}}</a>
+                <a href="{% url 'usersapp:login' %}">Login</a>
+                <a href="{% url 'usersapp:registration' %}">Registration</a>
             {% endif %}
+        </div>
+    {% endblock%}
+
+    {% block head %}
+        <header>
+            <div>
+                <h1>Marketplace</h1><br>
+            </div>
+            <hr>
+            <hr>
+        </header>
+    {% endblock %}
+
+    {% block content %}
+        {% for a in advert %}
+        <div>
+            <a href="{% url 'marketapp:advert_page' a.slug %}">
+                {{ a.image }}<br>
+                {{ a.title }}<br>
+                {{ a.description }}<br>
+            </a>
+        </div>
         {% endfor %}
-    </div>
+    {% endblock %}
+
 </body>
 </html>

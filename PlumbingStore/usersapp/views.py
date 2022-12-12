@@ -37,11 +37,6 @@ class UserAdvertsView(SingleObjectMixin, ListView):
         return self.object.advertisment_set.all()
 
 
-# TODO: Убрать временную пагу и добавить нормальную страницу
-class TemplateView(TemplateView):
-    template_name = 'registration/page.html'
-
-
 class UserCreation(CreateView):
     template_name = 'registration/registration.html'
     form_class = UserForm
