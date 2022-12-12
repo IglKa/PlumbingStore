@@ -2,38 +2,29 @@
 
 
 {% block title %}Market-advert{% endblock %}
-
-
+<hr>
+<hr>
 {% block content %}
-<div>
-    <h1>{{ advert.title }}</h1>
-
-    <h3>{{ advert.description }}</h3><br>
-
-    <h3>{{ advert.user }}</h3><br>
-
-</div>
-
-<hr>
-<hr>
-
-<div>
-    <form action="{% url 'marketapp:advert_page' advert.slug %}" method="post">
-        {{ form }}
-        {% csrf_token %}
-        <button type="submit">Submit</button>
-    </form>
-</div>
-<hr>
-<div>
-    {% for f in object_list %}
     <div>
-        {{ f.user }}<br>
-        {{ f.text }}<br>
-        {{ f.image }}<br>
+        <h1>{{ advert.title }}</h1>
+        <h3>{{ advert.description }}</h3><br>
+        <h3>{{ advert.user }}</h3><br>
     </div>
-</div>
-
-{% endfor %}
-
+    <div>
+        <form action="{% url 'marketapp:advert_page' advert.slug %}" method="post">
+            {{ form }}
+            {% csrf_token %}
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+    <hr>
+    <div>
+        {% for f in object_list %}
+        <div>
+            {{ f.user }}<br>
+            {{ f.text }}<br>
+            {{ f.image }}<br>
+        </div>
+    </div>
+    {% endfor %}
 {% endblock %}
