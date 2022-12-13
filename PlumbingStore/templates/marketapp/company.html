@@ -13,7 +13,7 @@
 </div>
 <hr>
 <br>
-<a href="{% url 'marketapp:create_adv' %}">Create Advert</a>
+<a href="{% url 'marketapp:create-adv' company.slug %}">Create Advert</a>
 <div>
     {% for advert in object_list %}
     <div>

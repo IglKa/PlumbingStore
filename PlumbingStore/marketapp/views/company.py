@@ -17,13 +17,11 @@ class CreateCompany(CreateView):
         'header_image',
         'profile_image',
               ]
-    success_url = ''
 
     def form_valid(self, form):
         form.instance.user = self.request.user
         slug = utils.SlugHandle(user=self.request.user,
-                           title=form.instance.name
-                           # Now I am actually hate myself for not ending it up
+                           name=form.instance.name
                             )
         form.instance.slug = slug.fill_slug()
         return super().form_valid(form)
@@ -54,10 +52,12 @@ class CreateAdvert(LoginRequiredMixin, CreateView):
     template_name = 'marketapp/createadvert.html'
 
     def form_valid(self, form):
-        form.instance.user = self.request.user
-        form.instance.company = self.kwargs.get('slug')
-        # Need to do something with this, but I really don't know.
-        # Might try to do it as Custom Field.
-        slug = utils.SlugHandle(user=self.request.user, title=form.instance.title)
+        # Assigning company to advert instance
+        form.instance.company = Company.objects.get(slug=self.kwargs.get('slug'))
+        # Calling slug maker and giving it company slug and title of advert.
+        slug = utils.SlugHandle(company_slug=self.kwargs.get('slug'),
+                                title=form.instance.title
+                                )
+        # Now advert's slug is ready. Assigning it to advert instance
         form.instance.slug = slug.fill_slug()
         return super().form_valid(form)

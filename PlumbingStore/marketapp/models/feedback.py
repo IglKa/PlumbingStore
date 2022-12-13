@@ -22,3 +22,6 @@ class Feedback(models.Model):
 
     def get_absolute_url(self):
         return reverse('marketapp:advert_page', kwargs={'slug': self.advert})
+
+    def __str__(self):
+        return self.advert
