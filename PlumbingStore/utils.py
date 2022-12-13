@@ -28,51 +28,39 @@ class SlugHandle:
     with self-made classes that actually do some work so don't be
     so strict who is watching it :) .
     """
+    # TODO: Refactor
 
     forbidden_symbols = ['@', '.', '/', '$', '#', '*', '+',
                          '?', '%', '>', '<']
 
     def __init__(self, **kwargs):
-        for key, value in kwargs:
-            if value != None or False:
-                self.kwargs = self.kwargs | dict(key, value)
-                continue
-            return self.kwargs
+        self.kwargs = {**kwargs}
+        print(self.kwargs)
 
         self.sep = '-'
         self.user = None
-        self.upper = False
 
     def _get_user(self):
-        if user in self.kwargs:
+        if 'user' in self.kwargs:
             self.user = str(user)
             self.user = self.user[:self.user.find('@')]
             return self.user
         return self.user
 
     def _get_sep(self):
-        if sep in self.kwargs:
+        if 'sep' in self.kwargs:
             self.sep = sep
         return self.sep
-
-    def _get_upper_method(self):
-        if upper in self.kwargs:
-            self.upper = True
-        return self.upper
 
     def _get_text_for_slug(self):
         self.text_list = []
         for i in self.kwargs:
-            if isinstance(i, str):
-                text_list.append(i)
+            if isinstance(self.kwargs[i], str):
+                self.text_list.append(self.kwargs[i])
         return self.text_list
 
     def fill_slug(self):
         text = self._get_sep().join(self._get_text_for_slug())
-        
         while ' ' in text:
             text = text.replace(' ', '')
-
-        if self._get_upper_method() != None:
-            return text.upper()
         return text.lower()
