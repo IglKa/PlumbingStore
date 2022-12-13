@@ -54,10 +54,7 @@ class CreateAdvert(LoginRequiredMixin, CreateView):
     template_name = 'marketapp/createadvert.html'
 
     def form_valid(self, form):
-        form.instance.user = self.request.user
-        form.instance.company = self.kwargs.get('slug')
-        # Need to do something with this, but I really don't know.
-        # Might try to do it as Custom Field.
-        slug = utils.SlugHandle(user=self.request.user, title=form.instance.title)
+        form.instance.company = Company.objects.get(slug=self.kwargs.get('slug'))
+        slug = utils.SlugHandle(company=form.instance.company.slug, title=form.instance.title)
         form.instance.slug = slug.fill_slug()
         return super().form_valid(form)

@@ -39,29 +39,40 @@ class SlugHandle:
                 continue
             return self.kwargs
 
+        self.sep = '-'
+        self.user = None
+        self.upper = False
+
     def _get_user(self):
         if user in self.kwargs:
             self.user = str(user)
-            return self.user[:self.user.find('@')]
-        return None
+            self.user = self.user[:self.user.find('@')]
+            return self.user
+        return self.user
 
     def _get_sep(self):
         if sep in self.kwargs:
-            return setattr(self, 'sep', sep)
-        return setattr(self, 'sep', '-')
+            self.sep = sep
+        return self.sep
 
     def _get_upper_method(self):
         if upper in self.kwargs:
-            return True
-        return False
+            self.upper = True
+        return self.upper
 
     def _get_text_for_slug(self):
-        text_list = []
+        self.text_list = []
         for i in self.kwargs:
             if isinstance(i, str):
                 text_list.append(i)
-            else:
-                pass
+        return self.text_list
 
     def fill_slug(self):
-        pass
+        text = self._get_sep().join(self._get_text_for_slug())
+        
+        while ' ' in text:
+            text = text.replace(' ', '')
+
+        if self._get_upper_method() != None:
+            return text.upper()
+        return text.lower()
