@@ -19,23 +19,17 @@ class AddContextMixin:
 
 
 class SlugHandle:
-    """
-    This will be an automatic slug maker.
-    As long as I want to build beautiful slugs
-    lately I would build my own package for it, but now
-    this what I have so far.
-    BTW this my first experience on working
-    with self-made classes that actually do some work so don't be
-    so strict who is watching it :) .
-    """
+    """ Auto Slug Maker """
     # TODO: Refactor
+
+    # I have build something by myself. Feels cool. But I know that this is a goofy af code.
+    # I need to actually refactor it to get more beautiful code. It need's a lot of work on it, sadly or luckly.
 
     forbidden_symbols = ['@', '.', '/', '$', '#', '*', '+',
                          '?', '%', '>', '<']
 
     def __init__(self, **kwargs):
         self.kwargs = {**kwargs}
-        print(self.kwargs)
 
         self.sep = '-'
         self.user = None
@@ -46,13 +40,14 @@ class SlugHandle:
             self.user = self.user[:self.user.find('@')]
             return self.user
         return self.user
-
+    # I don't know about this two methods, but I will probably delete it later.
     def _get_sep(self):
         if 'sep' in self.kwargs:
             self.sep = sep
         return self.sep
 
     def _get_text_for_slug(self):
+        # Giving a list of values that are str type and will be a future slug.
         self.text_list = []
         for i in self.kwargs:
             if isinstance(self.kwargs[i], str):
@@ -60,7 +55,9 @@ class SlugHandle:
         return self.text_list
 
     def fill_slug(self):
+        # With given separator join self.text_list
         text = self._get_sep().join(self._get_text_for_slug())
+        # While spaces are in text we need to delete it.
         while ' ' in text:
             text = text.replace(' ', '')
         return text.lower()
