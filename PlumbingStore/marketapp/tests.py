@@ -4,7 +4,7 @@ from PlumbingStore.utils import SlugHandle
 
 
 slug = SlugHandle(slug_text=[
-    'FUCK THIS BUG',
+    'FUCK !THIS@ BUG',
     'YEEEEEEAAAAAAA'
 ], sep='_')
-print(slug.form_slug())
+print(slug.form_slug_text())

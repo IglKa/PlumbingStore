@@ -22,8 +22,9 @@ class SlugHandle:
     """ Auto Slug Maker """
 
     # TODO: Refactor; think on making it as CustomField.
-    forbidden_symbols = ['@', '.', '/', '$', '#', '*', '+',
-                         '?', '%', '>', '<']
+    forbidden_symbols = ['/', '%', '>', '<',
+                         '"', '\\', '№', '`',
+                         '^', '{', '}']
 
     def __init__(self, slug_text: list, **kwargs):
         # Necessary attribute that will be forming text for slug
@@ -31,11 +32,17 @@ class SlugHandle:
         for key in kwargs:
             setattr(self, key, kwargs[key])
 
-    def form_slug(self):
+    def form_slug_text(self):
         sep = getattr(self, 'sep', '-')
         text = sep.join(self.slug_text)
         while ' ' in text:
             text = text.replace(' ', '')
+        return self._forbidden_symbols(text)
+
+    def _forbidden_symbols(self, text):
+        for i in self.forbidden_symbols:
+            if i in text:
+                text = text.replace(i, '')
         return text
 
     # I would like to do something that will search given attributes
