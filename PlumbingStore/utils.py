@@ -28,8 +28,8 @@ class SlugHandle:
     def __init__(self, slug_text: list, **kwargs):
         # Necessary attribute that will be forming text for slug
         self.slug_text = slug_text
-        for key, value in kwargs:
-            setattr(self, key, value)
+        for key in kwargs:
+            setattr(self, key, kwargs[key])
 
     def form_slug(self):
         sep = getattr(self, 'sep', '-')
