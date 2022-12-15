@@ -29,19 +29,19 @@ class SlugHandle:
         # Necessary attribute that will be forming text for slug
         self.slug_text = slug_text
         for key, value in kwargs:
-            setattr(self, str(key), value)
+            setattr(self, key, value)
 
-    # I would like to do something that will search given attributes for:
-    # 'lower', 'upper' or 'capitalize'
-    # to lately use it in forming slug. But I don't really know how to do this.
+    def form_slug(self):
+        sep = getattr(self, 'sep', '-')
+        text = sep.join(self.slug_text)
+        while ' ' in text:
+            text = text.replace(' ', '')
+        return text
+
+    # I would like to do something that will search given attributes
+    # for method to use in forming slug.
+    # like 'lower', 'upper' or 'capitalize'
+    # But I don't really know how to do this.
 
     def _methods_check(self):
         pass
-
-    def _get_sep(self):
-        self.sep = getattr(self, 'sep', default='-')
-        return self.sep
-
-    def _slug_text(self):
-        self.slug_text = self.sep.join(self.slug_text)
-        return self.slug_text

@@ -1,3 +1,10 @@
 from django.test import TestCase
 
-# Create your tests here.
+from PlumbingStore.utils import SlugHandle
+
+
+slug = SlugHandle(slug_text=[
+    'FUCK THIS BUG',
+    'YEEEEEEAAAAAAA'
+], sep='_')
+print(slug.form_slug())
