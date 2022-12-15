@@ -55,9 +55,7 @@ class CreateAdvert(LoginRequiredMixin, CreateView):
         # Assigning company to advert instance
         form.instance.company = Company.objects.get(slug=self.kwargs.get('slug'))
         # Calling slug maker and giving it company slug and title of advert.
-        slug = utils.SlugHandle(company_slug=self.kwargs.get('slug'),
-                                title=form.instance.title
-                                )
-        # Now advert's slug is ready. Assigning it to advert instance
-        form.instance.slug = slug.fill_slug()
+        form.instance.slug = utils.SlugHandle(slug_text=[self.kwargs.get('slug'),
+                                                         form.instance.title]
+                                             )
         return super().form_valid(form)
