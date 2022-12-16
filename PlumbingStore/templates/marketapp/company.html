@@ -1,8 +1,7 @@
 {% extends 'base.html' %}
 
 
-{% block title %}{{company.name}}{% endblock %}
-
+{% block title %}PlumbingStore | {{company.name}}{% endblock %}
 {% block content %}
 <div>
     <h1>{{company.name}}</h1>
@@ -13,14 +12,17 @@
 </div>
 <hr>
 <br>
-<a href="{% url 'marketapp:create-adv' company.slug %}">Create Advert</a>
 <div>
-    {% for advert in object_list %}
     <div>
-        {{advert.image}}<br>
-        {{advert.name}}<br>
-        {{advert.descr}}
+        {% for advert in object_list %}
+        <div>
+            <a href="{% url 'marketapp:advert_page' advert.slug%}">
+                {{ advert.image }}<br>
+                {{ advert.title }}<br>
+                {{ advert.description }}
+            </a>
+        </div>
+        {% endfor %}
     </div>
-    {% endfor %}
 </div>
 {% endblock %}

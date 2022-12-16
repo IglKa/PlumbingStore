@@ -20,17 +20,22 @@
         <div>
             {% if user.is_authenticated %}
                 <div>
+                    {{ user.image }}<br>
                     {{ user.first_name }}<br>
                     {{ user.email }}
                 </div>
-                <a href="{% url 'usersapp:logout' %}">Logout</a>
-                {% for m in menu %}
-                    {% if not forloop.last %}
-                        <a href="{% url m.url_name %}">{{ m.title }}</a>
-                    {% else %}
-                        <a href="#"></a>
-                    {% endif %}
-                {% endfor %}
+                <div>
+                    <a href="{% url 'usersapp:logout' %}">Logout</a>
+                    {% for m in menu %}
+                        {% if not forloop.last %}
+                            <a href="{% url m.url_name %}">{{ m.title }}</a>
+                        {% else %}
+                            <a href="#"></a>
+                        {% endif %}
+                    {% endfor %}
+                    <a href="{% url 'marketapp:company' user.company %}">My company</a>
+                    <a href="{% url 'marketapp:create-adv' user.company.slug %}">Create Advert</a>
+                </div>
                 <hr>
             {% else %}
                 <a href="{% url 'usersapp:login' %}">Login</a>

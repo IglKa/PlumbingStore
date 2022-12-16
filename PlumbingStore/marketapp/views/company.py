@@ -20,10 +20,8 @@ class CreateCompany(CreateView):
 
     def form_valid(self, form):
         form.instance.user = self.request.user
-        slug = utils.SlugHandle(user=self.request.user,
-                           name=form.instance.name
-                            )
-        form.instance.slug = slug.fill_slug()
+        slug = utils.SlugHandle(slug_text=[form.instance.name])
+        form.instance.slug = slug.form_slug_text()
         return super().form_valid(form)
 
 
@@ -34,12 +32,14 @@ class CompanyDetail(SingleObjectMixin, ListView):
     template_name = 'marketapp/company.html'
 
     def get(self, request, *args, **kwargs):
-        self.object = self.get_object(queryset=Company.objects.all())
+        self.object = self.get_object(queryset=Company.objects.filter(slug=kwargs.get('slug')
+                                                                      )
+                                      )
         return super().get(request, *args, **kwargs)
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['advert'] = self.object
+        context['company'] = self.object
         return context
 
     def get_queryset(self):
@@ -55,7 +55,8 @@ class CreateAdvert(LoginRequiredMixin, CreateView):
         # Assigning company to advert instance
         form.instance.company = Company.objects.get(slug=self.kwargs.get('slug'))
         # Calling slug maker and giving it company slug and title of advert.
-        form.instance.slug = utils.SlugHandle(slug_text=[self.kwargs.get('slug'),
+        slug = utils.SlugHandle(slug_text=[self.kwargs.get('slug'),
                                                          form.instance.title]
                                              )
+        form.instance.slug = slug.form_slug_text()
         return super().form_valid(form)
