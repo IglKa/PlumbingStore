@@ -16,7 +16,7 @@
     <div>
         {% for advert in object_list %}
         <div>
-            <a href="{% url 'marketapp:advert_page' advert.slug%}">
+            <a href="{% url 'marketapp:advert-page' advert.slug%}">
                 {{ advert.image }}<br>
                 {{ advert.title }}<br>
                 {{ advert.description }}
