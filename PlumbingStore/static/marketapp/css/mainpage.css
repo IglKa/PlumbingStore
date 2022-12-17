@@ -3,22 +3,21 @@ body {
     color: white;
 }
 
-h1 {
+
+.title {
     margin-left: 600px;
     color: #E0E0E0;
 }
 
-.profile-menu {
-    margin-left: 100px;
-    color: #E0E0E0;
-}
-
-
-.create-menu {
-    margin-left: 300px;
-    color: #E0E0E0;
-}
 
 a {
     color: white;
+}
+
+
+.slogan {
+    width: 200px;
+    height: 100px;
+    background-color: white;
+    border-radius: 100px/50px;
 }
