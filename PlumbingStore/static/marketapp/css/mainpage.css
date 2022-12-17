@@ -1,14 +1,14 @@
 body {
     background-color: #202020;
     color: white;
-    margin-left: 200px;
+    margin-left: 220px;
     padding: 0px 10px;
 }
 
 
 .main-title {
-    margin-left: 150px;
-    margin-top: 20px;
+    margin-left: 125px;
+    margin-top: 5px;
     color: #E0E0E0;
 }
 
@@ -19,21 +19,22 @@ body {
     height: 50px;
     background-color: #333333;
     color: #353839;
-    border-radius: 100px/50px;
+    border-radius: 100px;
+    border: solid black 1px;
 }
 
 
 .menu {
     position: fixed;
     height: 100%;
-    width: 200px;
+    width: 220px;
     left: 0;
     z-index: 1;
     top: 0;
     background-color: #333333;
     overflow-x: hidden;
     padding-top: 20px;
-    border: red;
+    border: solid black;
 }
 
 
@@ -41,7 +42,7 @@ body {
     font-size: 25px;
     color: #F5F5F5;
     text-decoration: none;
-    margin-left: 10px;
+    margin-left: 25px;
 }
 
 
@@ -49,17 +50,21 @@ body {
     font-size: 15px;
     color: #F5F5F5;
     text-decoration: none;
-    margin-left: 15px;
+    margin-left: 25px;
 }
 
 
 .post {
+    position: relative;
+    border-radius: 25px;
+    border: solid black;
     width: 500px;
     height: 250px;
     color: #F5F5F5;
     background-color: #353839;
     padding: 30px;
     margin-top: 50px;
+    margin-left: 475px;
 }
 
 
@@ -75,14 +80,22 @@ body {
 }
 
 
-.post .head {
-    position: relative;
-    width: 20px;
+.post .post-head {
+    position: absolute;
+    width: 500px;
+    background-color: #343434;
+    border-radius: 10px;
+    top: 5px;
+    border: solid #202020;
+}
+
+
+.post .post-content .post-content-text{
+    position: absolute;
+    bottom: 0;
+    width: 500px;
+    border-radius: 10px;
+    border: solid #202020;
     background-color: #343434;
 }
 
-
-.post .text {
-    position: absolute;
-    bottom: 0;
-}
