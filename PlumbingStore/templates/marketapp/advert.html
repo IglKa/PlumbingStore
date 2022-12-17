@@ -11,7 +11,7 @@
         <h3>{{ advert.user }}</h3><br>
     </div>
     <div>
-        <form action="{% url 'marketapp:advert_page' advert.slug %}" method="post">
+        <form action="{% url 'marketapp:advert-page' advert.slug %}" method="post">
             {{ form }}
             {% csrf_token %}
             <button type="submit">Submit</button>

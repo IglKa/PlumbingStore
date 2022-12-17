@@ -18,15 +18,16 @@
     {% endblock %}
 
     {% block menu %}
-        <div>
+        <div class="menu">
             {% if user.is_authenticated %}
                 <div>
                     {{ user.image }}<br>
                     {{ user.first_name }}<br>
                     {{ user.email }}
                 </div>
+                <hr>
                 <div>
-                    <a href="{% url 'usersapp:logout' %}">Logout</a>
+                    <a href="{% url 'usersapp:logout' %}">Logout</a><br>
                     {% for m in menu %}
                         {% if not forloop.last %}
                             <a href="{% url m.url_name %}">{{ m.title }}</a>
@@ -34,21 +35,21 @@
                             <a href="#"></a>
                         {% endif %}
                     {% endfor %}
-                    <a href="{% url 'marketapp:company' user.company %}">My company</a>
-                    <a href="{% url 'marketapp:create-adv' user.company.slug %}">Create Advert</a>
+                    <a href="{% url 'marketapp:company' user.company %}">My company</a><br>
+                    <a href="{% url 'marketapp:create-adv' user.company.slug %}">Create Advert</a><br>
                 </div>
                 <hr>
             {% else %}
                 <a href="{% url 'usersapp:login' %}">Login</a>
                 <a href="{% url 'usersapp:registration' %}">Registration</a>
-                <hr>
+
             {% endif %}
         </div>
     {% endblock%}
 
     {% block content %}
         {% for a in advert %}
-        <div>
+        <div class="post">
             <a href="{% url 'marketapp:advert-page' a.slug %}">
                 {{ a.image }}<br>
                 {{ a.title }}<br>

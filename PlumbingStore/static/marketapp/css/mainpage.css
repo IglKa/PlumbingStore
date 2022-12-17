@@ -1,7 +1,10 @@
 body {
-    background-color: #3B3C36;
+    background-color: #202020;
     color: white;
+    margin-left: 200px;
+    padding: 0px 10px;
 }
+
 
 .title {
     margin-left: 150px;
@@ -9,15 +12,55 @@ body {
     color: #E0E0E0;
 }
 
+
 .slogan {
     margin-left: 400px;
     width: 700px;
-    height: 100px;
-    background-color: black;
+    height: 50px;
+    background-color: #333333;
     color: #353839;
     border-radius: 100px/50px;
 }
 
-a {
-    color: white;
+
+.post {
+    width: 150px;
+    height: 75px;
+    color: #F5F5F5;
+    background-color: #353839;
+    padding: 30px;
+    margin-top: 50px;
+}
+
+
+.post a {
+    color: #F5F5F5;
+    text-decoration: none;
+    padding: 20px;
+
+}
+
+
+.post a:hover {
+    color: #F8F8FF;
+}
+
+.menu {
+    position: fixed;
+    height: 100%;
+    width: 200px;
+    left: 0;
+    z-index: 1;
+    top: 0;
+    background-color: #333333;
+    overflow-x: hidden;
+    padding-top: 20px;
+    border-color: red;
+}
+
+
+.menu a {
+    font-size: 25px;
+    color: #F5F5F5;
+    text-decoration: none;
 }
