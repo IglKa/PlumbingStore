@@ -1,19 +1,20 @@
 body {
-    background-color: #202020;
+    background-color: #3B3C36;
     color: white;
 }
 
-h1 {
-    margin-left: 600px;
+.title {
+    margin-left: 150px;
+    margin-top: 20px;
     color: #E0E0E0;
 }
 
 .slogan {
-    margin-left: 200px;
+    margin-left: 400px;
     width: 700px;
     height: 100px;
     background-color: black;
-    color: white;
+    color: #353839;
     border-radius: 100px/50px;
 }
 
