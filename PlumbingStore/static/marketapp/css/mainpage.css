@@ -6,14 +6,14 @@ body {
 }
 
 
-.title {
+.main-title {
     margin-left: 150px;
     margin-top: 20px;
     color: #E0E0E0;
 }
 
 
-.slogan {
+.slogan-oval {
     margin-left: 400px;
     width: 700px;
     height: 50px;
@@ -22,28 +22,6 @@ body {
     border-radius: 100px/50px;
 }
 
-
-.post {
-    width: 150px;
-    height: 75px;
-    color: #F5F5F5;
-    background-color: #353839;
-    padding: 30px;
-    margin-top: 50px;
-}
-
-
-.post a {
-    color: #F5F5F5;
-    text-decoration: none;
-    padding: 20px;
-
-}
-
-
-.post a:hover {
-    color: #F8F8FF;
-}
 
 .menu {
     position: fixed;
@@ -55,7 +33,7 @@ body {
     background-color: #333333;
     overflow-x: hidden;
     padding-top: 20px;
-    border-color: red;
+    border: red;
 }
 
 
@@ -63,4 +41,48 @@ body {
     font-size: 25px;
     color: #F5F5F5;
     text-decoration: none;
+    margin-left: 10px;
+}
+
+
+.menu .user-profile-links {
+    font-size: 15px;
+    color: #F5F5F5;
+    text-decoration: none;
+    margin-left: 15px;
+}
+
+
+.post {
+    width: 500px;
+    height: 250px;
+    color: #F5F5F5;
+    background-color: #353839;
+    padding: 30px;
+    margin-top: 50px;
+}
+
+
+.post a {
+    color: #F5F5F5;
+    text-decoration: none;
+    padding: 20px;
+}
+
+
+.post a:hover {
+    color: #F8F8FF;
+}
+
+
+.post .head {
+    position: relative;
+    width: 20px;
+    background-color: #343434;
+}
+
+
+.post .text {
+    position: absolute;
+    bottom: 0;
 }

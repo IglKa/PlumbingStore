@@ -9,9 +9,9 @@
 <body>
     {% block head %}
         <header>
-            <div class="slogan">
+            <div class="slogan-oval">
                 <div>
-                    <h1 class="title">Everything for purity of your ass</h1>
+                    <h1 class="main-title">Everything for purity of your ass</h1>
                 </div>
             </div>
         </header>
@@ -21,9 +21,11 @@
         <div class="menu">
             {% if user.is_authenticated %}
                 <div>
-                    {{ user.image }}<br>
-                    {{ user.first_name }}<br>
-                    {{ user.email }}
+                    <a class="user-profile-links" href="{% url 'usersapp:profile' user.pk %}">
+                        {{ user.image }}<br>
+                        {{ user.first_name }}<br>
+                        {{ user.email }}
+                    </a>
                 </div>
                 <hr>
                 <div>
@@ -50,11 +52,22 @@
     {% block content %}
         {% for a in advert %}
         <div class="post">
-            <a href="{% url 'marketapp:advert-page' a.slug %}">
-                {{ a.image }}<br>
-                {{ a.title }}<br>
-                {{ a.description }}<br>
-            </a>
+            <div class="post-head">
+                <div class="post-head-company">{{ a.company }}</div> <div class="post-text-date">{{ a.date_posted }}</div>
+            </div>
+            <div class="post-image">
+                {{ a.image }}
+            </div>
+            <div class="post-text">
+                <a href="{% url 'marketapp:advert-page' a.slug %}">
+                    <div class="post-text-title">
+                        {{ a.title }}
+                    </div>
+                    <div class="post-text-description">
+                        {{ a.description }}
+                    </div>
+                </a>
+            </div>
         </div>
         {% endfor %}
     {% endblock %}
