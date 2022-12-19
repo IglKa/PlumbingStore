@@ -1,9 +1,13 @@
 {% extends 'base.html' %}
+<head>
+    <meta charset="UTF-8">
+    {% load static %}
+    <link type="text/css" href="{% static 'marketapp/css/advertpage.css' %}" rel="stylesheet">
+    <title>{% block title %}PlumbingStore | {{ advert.slug }}{% endblock %}</title>
+</head>
 
-{% load static %}
-<link type="text/css" href="{% static 'marketapp/css/advertpage.css' %}" rel="stylesheet">
 
-{% block title %}PlumbingStore | {{ advert.slug }}{% endblock %}
+
 
 {% block content %}
     <div class="form">
