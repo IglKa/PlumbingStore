@@ -1,14 +1,21 @@
 {% extends 'base.html' %}
 
+{% load static %}
+<link type="text/css" href="{% static 'marketapp/css/advertpage.css' %}" rel="stylesheet">
 
-{% block title %}Market-advert{% endblock %}
-<hr>
-<hr>
+{% block title %}PlumbingStore | {{ advert.slug }}{% endblock %}
+
 {% block content %}
-    <div>
-        <h1>{{ advert.title }}</h1>
-        <h3>{{ advert.description }}</h3><br>
-        <h3>{{ advert.user }}</h3><br>
+    <div class="form">
+        <div class="form-title">
+            <h1>{{ advert.title }}</h1>
+        </div>
+        <div class="form-description">
+            <h3>{{ advert.description }}</h3>
+        </div>
+        <div class="form-company">
+            <h3>{{ advert.company}}</h3>
+        </div>
     </div>
     <div>
         <form action="{% url 'marketapp:advert-page' advert.slug %}" method="post">

@@ -39,6 +39,7 @@
                     {% endfor %}
                     <a href="{% url 'marketapp:company' user.company %}">My company</a><br>
                     <a href="{% url 'marketapp:create-adv' user.company.slug %}">Create Advert</a><br>
+                    <a href="#">Settings</a><br>
                 </div>
                 <hr>
             {% else %}
@@ -74,6 +75,7 @@
             </div>
         </div>
         {% endfor %}
+
     {% endblock %}
 </body>
 </html>
