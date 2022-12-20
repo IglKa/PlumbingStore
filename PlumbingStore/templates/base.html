@@ -3,7 +3,11 @@
 <head>
     <meta charset="UTF-8">
     {% load static %}
-    <link type="text/css" href="{% static 'marketapp/css/mainpage.css' %}" rel="stylesheet">
+
+    {% block css_add %}
+        <link type="text/css" href="{% static 'marketapp/css/mainpage.css' %}" rel="stylesheet">
+    {% endblock %}
+
     <title>{% block title %}PlumbingStore | Main page{% endblock %}</title>
 </head>
 <body>

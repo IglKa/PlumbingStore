@@ -1,24 +1,24 @@
 {% extends 'base.html' %}
-<head>
-    <meta charset="UTF-8">
-    {% load static %}
+
+{% load static %}
+
+{% block css_add %}
     <link type="text/css" href="{% static 'marketapp/css/advertpage.css' %}" rel="stylesheet">
-    <title>{% block title %}PlumbingStore | {{ advert.slug }}{% endblock %}</title>
-</head>
+    <link type="text/css" href="{% static 'marketapp/css/mainpage.css' %}" rel="stylesheet">
+{% endblock %}
 
-
-
+{% block title %} PlumbingStore | {{ advert.slug }} {% endblock %}
 
 {% block content %}
-    <div class="form">
-        <div class="form-title">
-            <h1>{{ advert.title }}</h1>
+    <div class="postadvert">
+        <div class="postadvert-title">
+            <h2>{{ advert.title }}</h2>
         </div>
-        <div class="form-description">
-            <h3>{{ advert.description }}</h3>
+        <div class="postadvert-description">
+            <h4>{{ advert.description }}</h4>
         </div>
-        <div class="form-company">
-            <h3>{{ advert.company}}</h3>
+        <div class="postadvert-company">
+            <h4>{{ advert.company}}</h4>
         </div>
     </div>
     <div>
