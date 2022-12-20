@@ -11,55 +11,53 @@
 
 
 {% block content %}
-    {% for a in advert %}
-        <div class="post">
-            <div class="post-head">
-                <div class="post-head-company">
-                    {{ a.company }}
+    <div class="advert">
+        <div class="advert-post">
+            <div class="advert-post-head">
+                <div class="advert-post-head-company">
+                    {{ advert.company }}
                 </div>
-                <div class="post-head-date">
-                    {{ a.date_posted }}
+                <div class="advert-post-head-date">
+                    {{ advert.date_posted }}
                 </div>
             </div>
-            <div class="post-content">
-                <div class="post-content-image">
-                    {{ a.image }}
+            <div class="advert-post-content">
+                <div class="advert-post-content-image">
+                    {{ advert.image }}
                 </div>
-                <div class="post-content-text">
-                    <div class="post-content-title">
-                        <a href="{% url 'marketapp:advert-page' a.slug %}">
-                            <div class="post-text-title">
-                                {{ a.title }}
-                            </div>
-                            <div class="post-content-description">
-                                {{ a.description }}
-                            </div>
-                        </a>
+                <div class="advert-post-content-text">
+                    <div class="advert-post-content-title">
+                        <div class="advert-post-text-title">
+                            {{ advert.title }}
+                        </div>
+                        <div class="advert-post-content-description">
+                            {{ advert.description }}
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    {% endfor %}
-    <div class="comment-section">
-        {% for f in object_list %}
-            <div class="feedback">
-                <div class="feeback-head">
-                    <div class="feedback-head-user">
-                        {{ f.user }}
+        <div class="advert-comment-section">
+            {% for f in object_list %}
+                <div class="advert-feedback">
+                    <div class="advert-feeback-head">
+                        <div class="advert-feedback-head-user">
+                            {{ f.user }}
+                        </div>
+                        <div class="advert-feedback-head-date">
+                            {{ f.date_posted }}
+                        </div>
                     </div>
-                    <div class="feedback-head-date">
-                        {{ f.date_posted }}
+                    <div class="advert-feedback-content">
+                        <div class="advert-feedback-content-text">
+                            {{ f.text }}
+                        </div>
+                        <div class="advert-feedback-content-image">
+                            {{ f.image }} <!--TODO: provide later-->
+                        </div>
                     </div>
                 </div>
-                <div class="feedback-content">
-                    <div class="feedback-content-text">
-                        {{ f.text }}
-                    </div>
-                    <div class="feedback-content-image">
-                        {{ f.image }} <!--TODO: provide later-->
-                    </div>
-                </div>
-            </div>
-        {% endfor %}
+            {% endfor %}
+        </div>
     </div>
 {% endblock %}

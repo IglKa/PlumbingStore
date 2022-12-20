@@ -46,7 +46,7 @@ body {
 }
 
 
-.menu .user-profile-links {
+.user-profile-links {
     font-size: 15px;
     color: #F5F5F5;
     text-decoration: none;
@@ -80,7 +80,7 @@ body {
 }
 
 
-.post .post-head {
+.post-head {
     position: absolute;
     width: 500px;
     background-color: #343434;
@@ -90,7 +90,7 @@ body {
 }
 
 
-.post .post-content .post-content-text{
+.post-content-text{
     position: absolute;
     bottom: 0;
     width: 500px;
