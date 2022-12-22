@@ -5,16 +5,16 @@ from django.views.generic import ListView, CreateView
 from django.views.generic.detail import SingleObjectMixin
 
 from marketapp.models import Advertisment, Feedback, Company
-from marketapp.forms import CreateFeedbackForm
+from marketapp.forms import CreateFeedbackForm, RatingForm
 from utils import AddContextMixin
 # I had to separate class AdvertPage(SingleObjectMixin, CreateView):
 # Because this implementation was causing a lot of problems.
-# Now the problem is, that this code is giving SQLqueries for each author of comment .
+# Now the problem is, that this code is giving SQLqueries for each author of comment.
 # TODO: Refactor
 
 
 class AdvertContextView(AddContextMixin, SingleObjectMixin, ListView):
-    """Will searsh for context to advert page"""
+    """Will search for context to advert page"""
     template_name = 'marketapp/advert.html'
 
     def get(self, request, *args, **kwargs):
@@ -28,6 +28,7 @@ class AdvertContextView(AddContextMixin, SingleObjectMixin, ListView):
         context['advert'] = self.object
         context['menu'] = self.add_context()
         context['form'] = CreateFeedbackForm()
+        context['rating_form'] = RatingForm()
         return context
 
     def get_queryset(self):
@@ -42,12 +43,12 @@ class CreateFeedbackView(LoginRequiredMixin, CreateView):
     template_name = 'marketapp/advert.html'
 
     def form_valid(self, form, **kwargs):
-        form.instance.user = self.request.user
+        form.instance.company = self.request.user.company
         form.instance.advert = Advertisment.objects.get(slug=self.kwargs.get('slug'))
         return super().form_valid(form)
 
     def get_success_url(self):
-        return reverse('marketapp:advert_page', kwargs={'slug': self.kwargs.get('slug')})
+        return reverse('marketapp:advert-page', kwargs={'slug': self.kwargs.get('slug')})
 
 
 class AdvertPage(View):

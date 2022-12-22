@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django.db import models
 
-from .models import Advertisment, Feedback, Company
+from .models import Advertisment, Feedback, Company, Rating
 
 
 admin.site.register(Feedback)
@@ -20,3 +20,8 @@ class CompanyAdmin(admin.ModelAdmin):
     list_display = ['category', 'holder', 'name',
                     'descr', 'date_created', 'slug'
                     ]
+
+
+@admin.register(Rating)
+class AdminRating(admin.ModelAdmin):
+    list_display = ['star', 'advert']

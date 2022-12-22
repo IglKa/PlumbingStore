@@ -20,6 +20,11 @@
                 <div class="advert-post-head-date">
                     {{ advert.date_posted }}
                 </div>
+                <div class="advert-post-head-rating">
+                    <form method="post" href="{% url 'marketapp:add-rating' %}">
+                        {{ rating_form }}
+                    </form>
+                </div>
             </div>
             <div class="advert-post-content">
                 <div class="advert-post-content-image">

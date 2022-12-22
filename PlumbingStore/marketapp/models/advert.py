@@ -29,9 +29,26 @@ class Advertisment(models.Model):
                             verbose_name='URL'
                             )
 
+    star_rating = models.ForeignKey('Rating', on_delete=models.CASCADE, null=True)
+
     def get_absolute_url(self):
         # Will return to company that advert belongs to.
         return reverse('marketapp:company', kwargs={'slug': self.company})
 
     def __str__(self):
         return self.slug
+
+
+class Star(models.Model):
+    value = models.SmallIntegerField()
+
+    def __str__(self):
+        return str(self.value)
+
+
+class Rating(models.Model):
+    star = models.ForeignKey(Star, on_delete=models.PROTECT)
+    advert = models.ForeignKey(Advertisment, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return f'{self.advert} - {self.star}'
