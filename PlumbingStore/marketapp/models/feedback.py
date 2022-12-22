@@ -24,4 +24,4 @@ class Feedback(models.Model):
         return reverse('marketapp:advert_page', kwargs={'slug': self.advert})
 
     def __str__(self):
-        return self.advert
+        return f'{self.advert}'

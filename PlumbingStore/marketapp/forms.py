@@ -1,14 +1,14 @@
 from django import forms
 
-from .models import Feedback, Advertisment, Rating
+from .models import Feedback, Advertisment, Star
 
 
 class RatingForm(forms.ModelForm):
     star = forms.ModelChoiceField(
-        queryset=Rating.objects.all(), widget=forms.RadioSelect(), empty_label=None
+        queryset=Star.objects.all(), widget=forms.RadioSelect(), empty_label=None
     )
     class Meta:
-        model = Rating
+        model = Star
         fields = ('star', )
 
 

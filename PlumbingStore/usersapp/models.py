@@ -11,14 +11,14 @@ class User(AbstractUser):
     email = models.EmailField(blank=False, unique=True)
     phone_number = models.DecimalField(max_digits=11, decimal_places=0, blank=True, default=None, null=True)
 
-    # Also adding employee status field, so client can recognize from who he is buying goods.
-    class EmployeeStatus(models.TextChoices):
+    # Also adding employee position field, so client can recognize from who he is buying goods.
+    class EmployeePosition(models.TextChoices):
         SALES_MANAGER = 'SALES MANAGER', 'Менеджер по продажам'
         SELF_EMPLOYED = 'SELF EMPLOYED', 'Самозанятый'
         RESELLER = 'RESELLER', 'Перекуп'
 
-    employee_status = models.CharField(max_length=15,
-                                       choices=EmployeeStatus.choices,
+    employee_position = models.CharField(max_length=15,
+                                       choices=EmployeePosition.choices,
                                        default=None,
                                        blank=True,
                                        null=True)

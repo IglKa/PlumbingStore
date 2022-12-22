@@ -21,7 +21,7 @@
                     {{ advert.date_posted }}
                 </div>
                 <div class="advert-post-head-rating">
-                    <form method="post" href="{% url 'marketapp:add-rating' %}">
+                    <form method="post" href="{% url 'marketapp:add-rating' advert.slug %}">
                         {{ rating_form }}
                     </form>
                 </div>
@@ -45,7 +45,7 @@
         <div class="advert-comment-section">
             {% for f in object_list %}
                 <div class="advert-feedback">
-                    <div class="advert-feeback-head">
+                    <div class="advert-feedback-head">
                         <div class="advert-feedback-head-user">
                             {{ f.user }}
                         </div>

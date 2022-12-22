@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django.db import models
 
-from .models import Advertisment, Feedback, Company, Rating
+from .models import Advertisment, Feedback, Company, Rating, Star
 
 
 admin.site.register(Feedback)
@@ -25,3 +25,5 @@ class CompanyAdmin(admin.ModelAdmin):
 @admin.register(Rating)
 class AdminRating(admin.ModelAdmin):
     list_display = ['star', 'advert']
+
+admin.site.register(Star)

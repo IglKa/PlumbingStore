@@ -1,13 +1,13 @@
-from .advert import Advertisment, Rating
+from .advert import Advertisment, Rating, Star
 from .company import Company
 from .feedback import Feedback
 
 
 __all__ = [
-    'Advertisment',
+    'Advertisment', 'Rating', 'Star',
     'Company',
-    'Feedback',
-    'Rating'
+    'Feedback'
+
 ]
 
 # TODO: BuyRequest, Follow feature, RatingCompany.
