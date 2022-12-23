@@ -28,7 +28,6 @@ class AdvertContextView(AddContextMixin, SingleObjectMixin, ListView):
         context['advert'] = self.object
         context['menu'] = self.add_context()
         context['form'] = CreateFeedbackForm()
-        context['rating_form'] = RatingForm()
         return context
 
     def get_queryset(self):

@@ -1,4 +1,5 @@
 from django.utils import timezone
+from django.db import models
 
 
 # Menu block for templates
@@ -51,4 +52,10 @@ class SlugHandle:
     # But I don't really know how to do this.
 
     def _methods_check(self):
+        pass
+
+
+class AdvertRatingField(models.Field):
+
+    def __init__(self, *args, **kwargs):
         pass

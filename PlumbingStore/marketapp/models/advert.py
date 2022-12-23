@@ -44,11 +44,3 @@ class Star(models.Model):
 
     def __str__(self):
         return f'{self.value}'
-
-
-class Rating(models.Model):
-    advert = models.ForeignKey(Advertisment, on_delete=models.CASCADE)
-    star = models.ForeignKey(Star, on_delete=models.PROTECT)
-
-    def __str__(self):
-        return f'{self.advert} - {self.star}'
