@@ -1,6 +1,8 @@
 from django.utils import timezone
 from django.db import models
 
+from marketapp.models import Feedback, Advertisment
+
 
 # Menu block for templates
 # TODO: Think better on functional that menu block will provide
@@ -56,16 +58,16 @@ class SlugHandle:
 
 
 class AdvertRatingField(models.Field):
+    """Rating Field for Advertisment"""
 
     def __init__(self, slug=None, *args ,**kwargs):
         self.slug = slug
+        self.object = Advertisment.objects.get(slug=self.slug)
         super().__init__(*args, **kwargs)
 
     def get_rating(self):
-        rating_query = FeedbackAdvert.objects.filter(advert=self.slug)
-        rating_query_list = rating_query.values_list('feedback_star', flat=True)
-        rating = sum(rating_query_list)
-        return round(rating / len(rating_query), 1)
+        feedbacks_query = Feedback.objects.filter(advert=self.object).values_list('star_given', flat=True)
+        return round(sum(feedbacks_query) / len(feedbacks_query), 1)
 
     def db_type(self, connection):
         return 'float'

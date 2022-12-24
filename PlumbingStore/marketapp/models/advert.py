@@ -3,7 +3,6 @@ from django.urls import reverse
 from django.utils import timezone
 
 from .company import Company
-from .feedback import Feedback
 from utils import AdvertRatingField
 
 
@@ -25,7 +24,6 @@ class Advertisment(models.Model):
                                  null=True,
                                  help_text="Choose category of your Advertisment. If it's not in the list just write it down and it will be created in our Data Base for future uses",
                                  )
-
 
     title = models.CharField(max_length=150)
     description = models.TextField(max_length=5000)

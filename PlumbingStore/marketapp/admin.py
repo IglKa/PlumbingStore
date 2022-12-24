@@ -6,13 +6,11 @@ from .models import Advertisment,\
                     Company, \
                     Star, \
                     AdvertCategory, \
-                    FeedbackAdvert, \
                     CompanyCategory
 
 
 admin.site.register(Feedback)
 admin.site.register(AdvertCategory)
-admin.site.register(FeedbackAdvert)
 admin.site.register(CompanyCategory)
 
 @admin.register(Advertisment)
