@@ -52,7 +52,7 @@ class Advertisment(models.Model):
                             )
 
     star_rating = AdvertRatingField(slug=slug,
-                                    null=True)
+                                    null=True,)
 
     def get_absolute_url(self):
         # Will return to company that advert belongs to.
