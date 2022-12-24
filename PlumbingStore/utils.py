@@ -57,5 +57,15 @@ class SlugHandle:
 
 class AdvertRatingField(models.Field):
 
-    def __init__(self, *args, **kwargs):
-        pass
+    def __init__(self, slug=None, *args ,**kwargs):
+        self.slug = slug
+        super().__init__(*args, **kwargs)
+
+    def get_rating(self):
+        rating_query = FeedbackAdvert.objects.filter(advert=self.slug)
+        rating_query_list = rating_query.values_list('feedback_star', flat=True)
+        rating = sum(rating_query_list)
+        return round(rating / len(rating_query), 1)
+
+    def db_type(self, connection):
+        return 'float'

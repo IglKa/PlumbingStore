@@ -16,7 +16,7 @@ class AdvertAdmin(admin.ModelAdmin):
 
 @admin.register(Company)
 class CompanyAdmin(admin.ModelAdmin):
-    list_display = ['category', 'holder', 'name',
+    list_display = ['category', 'name',
                     'descr', 'date_created', 'slug'
                     ]
 

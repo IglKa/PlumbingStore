@@ -5,7 +5,7 @@ from django.views.generic import ListView, CreateView
 from django.views.generic.detail import SingleObjectMixin
 
 from marketapp.models import Advertisment, Feedback, Company
-from marketapp.forms import CreateFeedbackForm, RatingForm
+from marketapp.forms import CreateFeedbackForm
 from utils import AddContextMixin
 # I had to separate class AdvertPage(SingleObjectMixin, CreateView):
 # Because this implementation was causing a lot of problems.

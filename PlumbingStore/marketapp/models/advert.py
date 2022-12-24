@@ -3,44 +3,60 @@ from django.urls import reverse
 from django.utils import timezone
 
 from .company import Company
+from .feedback import Feedback
+from utils import AdvertRatingField
+
+
+class FeedbackAdvert(models.Model):
+    advert = models.ForeignKey('Advertisment',
+                               on_delete=models.CASCADE,
+                               null=True,
+                               to_field='slug')
+
+    feedback_star = models.ForeignKey(Feedback,
+                                      on_delete=models.CASCADE,
+                                      null=True)
+    def __str__(self):
+         return f'{self.advert} - {self.feedback_star}'
+
+
+class AdvertCategory(models.Model):
+    category_name = models.CharField(max_length=40)
+
+    def __str__(self):
+        return f'{self.category_name}'
 
 
 class Advertisment(models.Model):
-    class Category(models.TextChoices):
-        GOODS = 'GOODS', 'Товары'
-        SERVICES = 'SERVICES', 'Услуги'
-        VACANCY = 'VACANCY', 'Вакансия'
+    company = models.ForeignKey(Company,
+                                on_delete=models.CASCADE,
+                                null=True,
+                                to_field='slug')
 
-    category = models.CharField(
-                                max_length=15,
-                                choices=Category.choices,
-                                default=Category.GOODS
-                                )
+    category = models.ForeignKey(AdvertCategory,
+                                 on_delete=models.PROTECT,
+                                 null=True,
+                                 help_text="Choose category of your Advertisment. If it's not in the list just write it down and it will be created in our Data Base for future uses",
+                                 )
+
+
     title = models.CharField(max_length=150)
     description = models.TextField(max_length=5000)
     image = models.ImageField(blank=True)
     date_posted = models.DateTimeField(default=timezone.now)
-    company = models.ForeignKey(Company, on_delete=models.CASCADE, null=True)
 
-    slug = models.SlugField(
-                            max_length=100,
+    slug = models.SlugField(max_length=100,
                             unique=True,
                             db_index=True,
                             verbose_name='URL'
                             )
 
-    star_rating = models.ForeignKey('Rating', on_delete=models.CASCADE, null=True)
+    star_rating = AdvertRatingField(slug=slug,
+                                    null=True)
 
     def get_absolute_url(self):
         # Will return to company that advert belongs to.
         return reverse('marketapp:company', kwargs={'slug': self.company})
 
     def __str__(self):
-        return self.slug
-
-
-class Star(models.Model):
-    value = models.SmallIntegerField()
-
-    def __str__(self):
-        return f'{self.value}'
+        return f'{self.slug}'
