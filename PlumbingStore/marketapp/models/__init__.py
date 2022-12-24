@@ -1,7 +1,7 @@
-from .advert import Advertisment, FeedbackAdvert, AdvertCategory
+from .advert import Advertisment,  AdvertCategory
 from .star import Star
 from .company import Company, CompanyCategory
-from .feedback import Feedback
+from .feedback import Feedback, FeedbackAdvert
 
 
 __all__ = [

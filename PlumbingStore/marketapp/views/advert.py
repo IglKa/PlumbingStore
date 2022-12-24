@@ -4,7 +4,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import ListView, CreateView
 from django.views.generic.detail import SingleObjectMixin
 
-from marketapp.models import Advertisment, Feedback, Company
+from marketapp.models import Advertisment, Feedback, Company, FeedbackAdvert
 from marketapp.forms import CreateFeedbackForm
 from utils import AddContextMixin
 # I had to separate class AdvertPage(SingleObjectMixin, CreateView):
@@ -18,8 +18,8 @@ class AdvertContextView(AddContextMixin, SingleObjectMixin, ListView):
     template_name = 'marketapp/advert.html'
 
     def get(self, request, *args, **kwargs):
-        # We need to find the SingleObject that we are working with
-        # so we can find it's comments later.
+        # We need to find the SingleObject that we are working with,
+        # so we can find its comments later.
         self.object = self.get_object(queryset=Advertisment.objects.all())
         return super().get(request, *args, **kwargs)
 
@@ -31,7 +31,6 @@ class AdvertContextView(AddContextMixin, SingleObjectMixin, ListView):
         return context
 
     def get_queryset(self):
-        # Finding set of feedbacks for advertisment.
         return self.object.feedback_set.all()
 
 
@@ -58,6 +57,6 @@ class AdvertPage(View):
         return view(request, *args, **kwargs)
 
     def post(self, request, *args, **kwargs):
-        # call form class with as_view() method
+        # call form class
         view = CreateFeedbackView.as_view()
         return view(request, *args, **kwargs)
