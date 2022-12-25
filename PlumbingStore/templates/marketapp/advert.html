@@ -1,30 +1,46 @@
 {% extends 'base.html' %}
 
+{% load static %}
 
-{% block title %}Market-advert{% endblock %}
-<hr>
-<hr>
+{% block css_add %}
+    <link type="text/css" href="{% static 'marketapp/css/advertpage.css' %}" rel="stylesheet">
+    <link type="text/css" href="{% static 'marketapp/css/mainpage.css' %}" rel="stylesheet">
+{% endblock %}
+
+{% block title %} PlumbingStore | {{ object.slug }} {% endblock %}
+
+
 {% block content %}
-    <div>
-        <h1>{{ advert.title }}</h1>
-        <h3>{{ advert.description }}</h3><br>
-        <h3>{{ advert.user }}</h3><br>
-    </div>
-    <div>
-        <form action="{% url 'marketapp:advert-page' advert.slug %}" method="post">
-            {{ form }}
-            {% csrf_token %}
-            <button type="submit">Submit</button>
-        </form>
-    </div>
-    <hr>
-    <div>
-        {% for f in object_list %}
-        <div>
-            {{ f.user }}<br>
-            {{ f.text }}<br>
-            {{ f.image }}<br>
+    <div class="advert">
+        <div class="advert-post">
+            <div class="advert-post-head">
+                <div class="advert-post-head-company">
+                    {{ object.company }}
+                </div>
+                <div class="advert-post-head-date">
+                    {{ object.date_posted }}
+                </div>
+                <div class="advert-post-head-rating">
+                    <a href="{% url 'marketapp:feedback-section' object.slug%}">
+                        {{ object.star_rating }}
+                    </a>
+                </div>
+            </div>
+            <div class="advert-post-content">
+                <div class="advert-post-content-image">
+                    {{ object.image }}
+                </div>
+                <div class="advert-post-content-text">
+                    <div class="advert-post-content-title">
+                        <div class="advert-post-text-title">
+                            {{ object.title }}
+                        </div>
+                        <div class="advert-post-content-description">
+                            {{ object.description }}
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
-    {% endfor %}
 {% endblock %}

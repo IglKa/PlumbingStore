@@ -22,7 +22,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('__debug__/', include(debug_toolbar.urls)),
 
-    path('user', include('usersapp.urls')),
+    path('user/', include('usersapp.urls')),
     # TODO: path('settings/', include('settingsapp.urls')),
 
     path('', include('marketapp.urls')), # Main app here

@@ -3,24 +3,25 @@ from django.urls import reverse
 from django.utils import timezone
 
 
-class Company(models.Model):
-    class Category(models.TextChoices):
-        SHOP = 'SHOP', 'Shop'
-        STARTUP = 'STARTUP', 'Startup'
-        BUSINESS = 'BUSINESS', 'Business'
+class CompanyCategory(models.Model):
+    category_name = models.CharField(max_length=30)
 
-    holder = models.ForeignKey('usersapp.User', on_delete=models.CASCADE,
-                               null=True, related_name='holder')
+    def __str__(self):
+        return f'{self.category_name}'
+
+
+class Company(models.Model):
+    category = models.ForeignKey(CompanyCategory,
+                                 null=True,
+                                 on_delete=models.PROTECT,
+                                 help_text="Choose category of your Company. If it's not in the list just write it down and it will be created in our Data Base for future uses"
+                                 )
 
     name = models.CharField(max_length=50, blank=False)
     descr = models.TextField(max_length=5000, blank=False)
     header_image = models.ImageField(blank=True)
     profile_image = models.ImageField(blank=True)
     date_created = models.DateTimeField(default=timezone.now)
-
-    category = models.CharField(max_length=10,
-                                choices=Category.choices,
-                                default=Category.SHOP)
 
     slug = models.SlugField(max_length=100,
                             unique=True,
@@ -32,3 +33,16 @@ class Company(models.Model):
 
     def __str__(self):
         return self.slug
+
+
+class CompanyHolder(models.ForeignKey):
+    holder = models.ForeignKey('usersapp.User',
+                               on_delete=models.CASCADE,
+                               null=True)
+
+    company = models.ForeignKey(Company,
+                                on_delete=models.CASCADE,
+                                null=True)
+
+    def __str__(self):
+        return f'{self.holder} - {self.company}'

@@ -1,4 +1,5 @@
 from django.utils import timezone
+from django.db import models
 
 
 # Menu block for templates
@@ -52,3 +53,19 @@ class SlugHandle:
 
     def _methods_check(self):
         pass
+
+
+class AdvertRatingField(models.Field):
+    """Rating Field for Advertisment"""
+
+    def __init__(self, slug=None, *args ,**kwargs):
+        self.slug = slug
+        super().__init__(*args, **kwargs)
+
+    def get_rating(self):
+        from marketapp.models import Feedback
+        feedbacks_query = Feedback.objects.filter(advert__slug=self.slug)
+        return round(sum(feedbacks_query) / len(feedbacks_query), 1)
+
+    def db_type(self, connection):
+        return 'float'

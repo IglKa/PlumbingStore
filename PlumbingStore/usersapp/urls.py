@@ -11,5 +11,4 @@ urlpatterns = [
     path('registration/', views.UserCreation.as_view(), name='registration'),
     path('<int:pk>/', views.ProfileView.as_view(), name="profile"),
 
-    path('<int:pk>/adverts/', views.UserAdvertsView.as_view(), name="user_adverts"),
 ]

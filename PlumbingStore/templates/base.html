@@ -3,7 +3,11 @@
 <head>
     <meta charset="UTF-8">
     {% load static %}
-    <link type="text/css" href="{% static 'marketapp/css/mainpage.css' %}" rel="stylesheet">
+
+    {% block css_add %}
+        <link type="text/css" href="{% static 'marketapp/css/mainpage.css' %}" rel="stylesheet">
+    {% endblock %}
+
     <title>{% block title %}PlumbingStore | Main page{% endblock %}</title>
 </head>
 <body>
@@ -39,6 +43,7 @@
                     {% endfor %}
                     <a href="{% url 'marketapp:company' user.company %}">My company</a><br>
                     <a href="{% url 'marketapp:create-adv' user.company.slug %}">Create Advert</a><br>
+                    <a href="#">Settings</a><br>
                 </div>
                 <hr>
             {% else %}
@@ -53,7 +58,15 @@
         {% for a in advert %}
         <div class="post">
             <div class="post-head">
-                <div class="post-head-company">{{ a.company }}</div> <div class="post-head-date">{{ a.date_posted }}</div>
+                <div class="post-head-company">
+                    {{ a.company }}
+                </div>
+                <div class="post-head-date">
+                    {{ a.date_posted }}
+                </div>
+                <div class="post-head-rating">
+                    {{ a.star_rating }}
+                </div>
             </div>
             <div class="post-content">
                 <div class="post-content-image">
@@ -74,6 +87,7 @@
             </div>
         </div>
         {% endfor %}
+
     {% endblock %}
 </body>
 </html>
