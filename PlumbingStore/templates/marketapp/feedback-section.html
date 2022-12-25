@@ -1,7 +1,11 @@
 {% extends 'base.html' %}
 
+{% block title %}
+    PlumbingStore | {{advert_slug}} | comments
+{% endblock %}
+
 {% block content %}
-    <div class="advert-comment-section">
+    <div class="advert-feedback-section">
         {% for f in object_list %}
             <div class="advert-feedback">
                 <div class="advert-feedback-head">

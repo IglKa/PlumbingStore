@@ -25,7 +25,7 @@ class FeedbackContextView(AddContextMixin, SingleObjectMixin, ListView):
         return self.object.feedback_set.all()
 
 
-class SendFeedbackView(CreateView):
+class SendFeedbackView(LoginRequiredMixin, CreateView):
     form_class = CreateFeedbackForm
     template_name = 'marketapp/feedback-section.html'
 
