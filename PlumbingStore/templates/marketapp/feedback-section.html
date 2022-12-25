@@ -4,22 +4,37 @@
     PlumbingStore | {{advert_slug}} | comments
 {% endblock %}
 
+{% load static %}
+{% block css_add %}
+    <link type="text/css" href="{% static 'marketapp/css/feedback-section.css' %}" rel="stylesheet">
+    <link type="text/css" href="{% static 'marketapp/css/mainpage.css' %}" rel="stylesheet">
+{% endblock %}
+
 {% block content %}
     <div class="advert-feedback-section">
+        <div class="form-section">
+            <form href="{% url 'marketapp:feedback-section' advert_slug %}" method="post">
+                {% csrf_token %}
+                {{ form }}
+                <button type="submit">Send Feedback</button>
+            </form>
+        </div>
+        <hr>
         {% for f in object_list %}
             <div class="advert-feedback">
                 <div class="advert-feedback-head">
                     <div class="advert-feedback-head-user">
                         {{ f.user }}
                     </div>
-                    <div class="advert-feedback-head-star">
-                        {{ f.star_given }}
-                    </div>
                     <div class="advert-feedback-head-date">
                         {{ f.date_posted }}
                     </div>
                 </div>
+                <hr>
                 <div class="advert-feedback-content">
+                    <div class="advert-feedback-content-star">
+                        {{ f.star_given }}
+                    </div>
                     <div class="advert-feedback-content-text">
                         {{ f.text }}
                     </div>
@@ -29,12 +44,5 @@
                 </div>
             </div>
         {% endfor %}
-        <div class="form-section">
-            <form href="{% url 'marketapp:feedback-section' advert_slug %}" method="post">
-                {% csrf_token %}
-                {{ form }}
-                <button type="submit">Send Feedback</button>
-            </form>
-        </div>
     </div>
 {% endblock %}

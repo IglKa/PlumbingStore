@@ -1,3 +1,19 @@
 .advert-feedback-section{
+    width: 550px;
+    height: fit-content;
+    margin-left: 475px;
+    margin-top: 50px;
+    background-color: #353839;
+    border-radius: 5px;
+    border: solid black;
+}
 
+
+.advert-feedback {
+    margin-left: 50px;
+    width: fit-content;
+    height: fit-content;
+    padding: 10px;
+    border: solid black;
+    border-radius: 3px;
 }
