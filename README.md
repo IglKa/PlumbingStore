@@ -15,4 +15,4 @@ Little doc:
   -marketapp: main app where all processes like create advertisment and send feedback is processing. Also it 
               provides logic for company page.
 
-Рофл пет-проектик(по совместительству мой лучший), в котором на данный момент реализован только бэк. Позже начну работу со стилями.
+Рофл пет-проектик (учебный, так сказать песочница), в котором будет практика всего, что можно применить в типичном маркетплейсе.
