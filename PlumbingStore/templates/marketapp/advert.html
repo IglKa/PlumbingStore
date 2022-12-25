@@ -7,7 +7,7 @@
     <link type="text/css" href="{% static 'marketapp/css/mainpage.css' %}" rel="stylesheet">
 {% endblock %}
 
-{% block title %} PlumbingStore | {{ advert.slug }} {% endblock %}
+{% block title %} PlumbingStore | {{ object.slug }} {% endblock %}
 
 
 {% block content %}
@@ -15,52 +15,32 @@
         <div class="advert-post">
             <div class="advert-post-head">
                 <div class="advert-post-head-company">
-                    {{ advert.company }}
+                    {{ object.company }}
                 </div>
                 <div class="advert-post-head-date">
-                    {{ advert.date_posted }}
+                    {{ object.date_posted }}
                 </div>
                 <div class="advert-post-head-rating">
-
+                    <a href="{% url 'marketapp:feedback-section' object.slug%}">
+                        {{ object.star_rating }}
+                    </a>
                 </div>
             </div>
             <div class="advert-post-content">
                 <div class="advert-post-content-image">
-                    {{ advert.image }}
+                    {{ object.image }}
                 </div>
                 <div class="advert-post-content-text">
                     <div class="advert-post-content-title">
                         <div class="advert-post-text-title">
-                            {{ advert.title }}
+                            {{ object.title }}
                         </div>
                         <div class="advert-post-content-description">
-                            {{ advert.description }}
+                            {{ object.description }}
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="advert-comment-section">
-            {% for f in object_list %}
-                <div class="advert-feedback">
-                    <div class="advert-feedback-head">
-                        <div class="advert-feedback-head-user">
-                            {{ f.user }}
-                        </div>
-                        <div class="advert-feedback-head-date">
-                            {{ f.date_posted }}
-                        </div>
-                    </div>
-                    <div class="advert-feedback-content">
-                        <div class="advert-feedback-content-text">
-                            {{ f.text }}
-                        </div>
-                        <div class="advert-feedback-content-image">
-                            {{ f.image }} <!--TODO: provide later-->
-                        </div>
-                    </div>
-                </div>
-            {% endfor %}
         </div>
     </div>
 {% endblock %}

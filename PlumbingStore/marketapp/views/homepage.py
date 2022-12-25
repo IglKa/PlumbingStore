@@ -6,6 +6,7 @@ import utils
 
 class MarketHome(utils.AddContextMixin, ListView):
     """Main Home Page"""
+
     model = Advertisment
     template_name = 'base.html'
     context_object_name = 'advert'

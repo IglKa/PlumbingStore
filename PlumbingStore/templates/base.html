@@ -58,7 +58,15 @@
         {% for a in advert %}
         <div class="post">
             <div class="post-head">
-                <div class="post-head-company">{{ a.company }}</div> <div class="post-head-date">{{ a.date_posted }}</div>
+                <div class="post-head-company">
+                    {{ a.company }}
+                </div>
+                <div class="post-head-date">
+                    {{ a.date_posted }}
+                </div>
+                <div class="post-head-rating">
+                    {{ a.star_rating }}
+                </div>
             </div>
             <div class="post-content">
                 <div class="post-content-image">

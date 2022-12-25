@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="advert-comment-section">
+        {% for f in object_list %}
+            <div class="advert-feedback">
+                <div class="advert-feedback-head">
+                    <div class="advert-feedback-head-user">
+                        {{ f.user }}
+                    </div>
+                    <div class="advert-feedback-head-star">
+                        {{ f.star_given }}
+                    </div>
+                    <div class="advert-feedback-head-date">
+                        {{ f.date_posted }}
+                    </div>
+                </div>
+                <div class="advert-feedback-content">
+                    <div class="advert-feedback-content-text">
+                        {{ f.text }}
+                    </div>
+                    <div class="advert-feedback-content-image">
+                        {{ f.image }} <!--TODO: provide later-->
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+    <div class="form-section">
+        {{ form }}
+    </div>
+{% endblock %}

@@ -11,11 +11,9 @@ class CreateAdvertForm(forms.ModelForm):
 
 
 class CreateFeedbackForm(forms.ModelForm):
-    
-    star_given = forms.ModelChoiceField(
-        queryset=Star.objects.all(),
-        widget=forms.RadioSelect,
-        empty_label=None)
+    star_given = forms.ModelChoiceField(queryset=Star.objects.all(),
+                                        widget=forms.RadioSelect,
+                                        empty_label=None)
 
     class Meta:
         model = Feedback
