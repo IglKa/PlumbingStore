@@ -25,8 +25,12 @@
                 </div>
             </div>
         {% endfor %}
-    </div>
-    <div class="form-section">
-        {{ form }}
+        <div class="form-section">
+            <form href="{% url 'marketapp:feedback-section' advert_slug %}" method="post">
+                {% csrf_token %}
+                {{ form }}
+                <button type="submit">Send Feedback</button>
+            </form>
+        </div>
     </div>
 {% endblock %}
