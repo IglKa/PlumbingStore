@@ -1,6 +1,6 @@
 body {
     background-color: #202020;
-    color: white;
+    color: #F5F5F5;
     margin-left: 220px;
     padding: 0px 10px;
 }
@@ -38,28 +38,32 @@ body {
 }
 
 
-.menu a {
+.other-links a {
     font-size: 25px;
-    color: #F5F5F5;
     text-decoration: none;
     margin-left: 25px;
+    color: #F5F5F5;
 }
 
 
-.user-profile-links {
-    font-size: 15px;
-    color: #F5F5F5;
+.menu a:hover {
+    color: gray;
+}
+
+
+.user-profile-links a {
+    font-size: 20px;
     text-decoration: none;
-    margin-left: 25px;
+    color: #F5F5F5;
 }
 
 
 .post {
     position: relative;
-    border-radius: 25px;
+    border-radius: 7px;
     border: solid black;
     width: 500px;
-    height: 250px;
+    height: 500px;
     color: #F5F5F5;
     background-color: #353839;
     padding: 30px;
@@ -71,12 +75,12 @@ body {
 .post a {
     color: #F5F5F5;
     text-decoration: none;
-    padding: 20px;
+    padding: 10px;
 }
 
 
 .post a:hover {
-    color: #F8F8FF;
+    color: gray;
 }
 
 
@@ -90,12 +94,9 @@ body {
 }
 
 
-.post-content-text{
+.post-content{
     position: absolute;
-    bottom: 0;
+    top: 70px;
     width: 500px;
-    border-radius: 10px;
-    border: solid #202020;
-    background-color: #343434;
 }
 

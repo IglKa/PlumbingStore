@@ -24,16 +24,20 @@
     {% block menu %}
         <div class="menu">
             {% if user.is_authenticated %}
-                <div>
-                    <a class="user-profile-links" href="{% url 'usersapp:profile' user.pk %}">
+                <div class="user-profile-links">
+                    <a href="{% url 'usersapp:profile' user.pk %}">
                         {{ user.image }}<br>
                         {{ user.first_name }}<br>
                         {{ user.email }}
                     </a>
+                    <a href="{% url 'usersapp:logout' %}">Logout</a><br>
                 </div>
                 <hr>
-                <div>
-                    <a href="{% url 'usersapp:logout' %}">Logout</a><br>
+                <div class="other-links">
+                    <a href="{% url 'marketapp:homepage' %}">Home</a><br>
+                    <a href="{% url 'marketapp:create-adv' user.company.slug %}">Create Advert</a><br>
+                    <a href="{% url 'marketapp:company' user.company %}">My company</a><br>
+                    <a href="#">Settings</a><br>
                     {% for m in menu %}
                         {% if not forloop.last %}
                             <a href="{% url m.url_name %}">{{ m.title }}</a>
@@ -41,9 +45,6 @@
                             <a href="#"></a>
                         {% endif %}
                     {% endfor %}
-                    <a href="{% url 'marketapp:company' user.company %}">My company</a><br>
-                    <a href="{% url 'marketapp:create-adv' user.company.slug %}">Create Advert</a><br>
-                    <a href="#">Settings</a><br>
                 </div>
                 <hr>
             {% else %}
@@ -69,20 +70,20 @@
                 </div>
             </div>
             <div class="post-content">
-                <div class="post-content-image">
-                    {{ a.image }}
-                </div>
                 <div class="post-content-text">
                     <div class="post-content-title">
                         <a href="{% url 'marketapp:advert-page' a.slug %}">
                             <div class="post-text-title">
-                                {{ a.title }}
+                                <h2>{{ a.title }}</h2>
                             </div>
                             <div class="post-content-description">
-                                {{ a.description }}
+                                <h4>{{ a.description }}</h4>
                             </div>
                         </a>
                     </div>
+                </div>
+                <div class="post-content-image">
+                    {{ a.image }}
                 </div>
             </div>
         </div>
