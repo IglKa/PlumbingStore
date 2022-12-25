@@ -1,40 +1,44 @@
-.advert{
+.advert {
     background-color: #353839;
-    border-radius: 25px;
-    border: solid black;
+    border-radius: 7px;
+    border: solid black 3px;
     padding: 30px;
     margin-top: 50px;
-    margin-left: 470px;
-    width: 500px;
-    height: 700px;
+    margin-left: 420px;
+    width: 600px;
+    height: fit-content;
     color: #F5F5F5;
 }
 
 
-.advert-post{
+.advert-post {
     width: auto;
-    background-color: #343434;
     border-radius: 10px;
     top: 5px;
-    border: solid #202020;
 }
 
 
-.advert-post-head{
+.advert-post-head {
     position: relative;
-    width: fit-content;
-    background-color: #343434;
-    border-radius: 10px;
     top: 0;
-    border: solid #202020;
 }
 
 
-.advert-post-content{
+.advert-post-head a {
+    color: #F5F5F5;
+    text-decoration: none;
+}
+
+
+.advert-post-head a:hover {
+    color: gray;
+}
+
+
+.advert-post-content {
     position: relative;
     bottom: 0;
+    top: 10px;
     width: fit-content;
-    border-radius: 10px;
-    border: solid #202020;
-    background-color: #343434;
 }
+
