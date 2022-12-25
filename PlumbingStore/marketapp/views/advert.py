@@ -4,8 +4,8 @@ from marketapp.models import Advertisment, Feedback, Company
 from utils import AddContextMixin
 
 
-# I had separated Advertisment page and Feedback section for
-# optimization of QuerySets that was going to DB.
+# I had to separate Advertisment page and Feedback section for
+# lowering queries that was going to DB.
 class AdvertDetailView(AddContextMixin, DetailView):
     """Advertisment detail"""
 
