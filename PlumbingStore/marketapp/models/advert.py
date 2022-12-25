@@ -2,8 +2,8 @@ from django.db import models
 from django.urls import reverse
 from django.utils import timezone
 
+import utils
 from .company import Company
-from utils import AdvertRatingField
 
 
 class AdvertCategory(models.Model):
@@ -36,8 +36,8 @@ class Advertisment(models.Model):
                             verbose_name='URL'
                             )
 
-    star_rating = AdvertRatingField(slug=slug,
-                                    null=True,)
+    star_rating = utils.AdvertRatingField(slug=slug,
+                                          null=True,)
 
     def get_absolute_url(self):
         # Will return to company that advert belongs to.

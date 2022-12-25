@@ -4,7 +4,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import ListView, CreateView
 from django.views.generic.detail import SingleObjectMixin
 
-from marketapp.models import Advertisment, Feedback, Company, FeedbackAdvert
+from marketapp.models import Advertisment, Feedback, Company
 from marketapp.forms import CreateFeedbackForm
 from utils import AddContextMixin
 # I had to separate class AdvertPage(SingleObjectMixin, CreateView):
