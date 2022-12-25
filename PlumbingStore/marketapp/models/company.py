@@ -4,6 +4,9 @@ from django.utils import timezone
 
 
 class CompanyCategory(models.Model):
+    """Company category"""
+
+    # Same as with advert categories
     category_name = models.CharField(max_length=30)
 
     def __str__(self):
@@ -36,6 +39,7 @@ class Company(models.Model):
 
 
 class CompanyHolder(models.ForeignKey):
+    # Made this table for more comfortable and useful search for holder
     holder = models.ForeignKey('usersapp.User',
                                on_delete=models.CASCADE,
                                null=True)

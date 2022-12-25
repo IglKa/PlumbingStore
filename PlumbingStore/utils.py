@@ -55,8 +55,15 @@ class SlugHandle:
         pass
 
 
+# TODO: end it normally and provide its logic.
 class AdvertRatingField(models.Field):
-    """Rating Field for Advertisment"""
+    """
+    Rating Field for Advertisment.
+
+    Here this class field will look for all feedbacks of given advertisment
+    and then return arithmetic mean of rating
+    (each Feedback have a star that user gives while writing comment).
+    """
 
     def __init__(self, slug=None, *args ,**kwargs):
         self.slug = slug

@@ -8,6 +8,7 @@ urlpatterns = [
     path('', MarketHome.as_view(), name='homepage'),
 
     path('<slug:slug>/', AdvertDetailView.as_view(), name='advert-page'),
+    # Separate advert page and feedbacks
     path('<slug:slug>/feedbacks', FeedbackSectionView.as_view(), name='feedback-section'),
 
     path('company/<slug:slug>/', CompanyDetail.as_view(), name='company'),

@@ -9,6 +9,9 @@ from marketapp.models import Advertisment, Company
 
 
 class CreateCompany(CreateView):
+    """Creating company logic"""
+
+    # TODO: Think better on how this process will be going, what user needs to input for it, what data to store.
     model = Company
     template_name = 'marketapp/createcompany.html'
     fields = [
@@ -28,6 +31,8 @@ class CreateCompany(CreateView):
 # Same concept as with advert page.
 # The only thing I don't like here, that it's actually copying advert page.
 class CompanyDetail(SingleObjectMixin, ListView):
+    """Company Page"""
+
     model = Company
     template_name = 'marketapp/company.html'
 
@@ -47,6 +52,8 @@ class CompanyDetail(SingleObjectMixin, ListView):
 
 
 class CreateAdvert(LoginRequiredMixin, CreateView):
+    """Create Advertisment View"""
+
     model = Advertisment
     form_class = CreateAdvertForm
     template_name = 'marketapp/createadvert.html'

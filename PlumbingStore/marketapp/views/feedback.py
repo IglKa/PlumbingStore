@@ -8,6 +8,12 @@ from utils import AddContextMixin
 
 
 class FeedbackContextView(AddContextMixin, SingleObjectMixin, ListView):
+    """
+    Feedback Context View.
+
+    This will be providing context for feedback section page.
+    """
+
     template_name = 'marketapp/feedback-section.html'
 
     def get(self, request, *args, **kwargs):
@@ -16,6 +22,8 @@ class FeedbackContextView(AddContextMixin, SingleObjectMixin, ListView):
 
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super().get_context_data(**kwargs)
+        # Because of little problem that separating Advertisment and Feedbacks
+        # cause, we need to give slug of advert to template(it's lately used on page title and form).
         context['advert_slug'] = self.object.slug
         context['menu'] = self.add_context()
         context['form'] = CreateFeedbackForm()
@@ -26,6 +34,12 @@ class FeedbackContextView(AddContextMixin, SingleObjectMixin, ListView):
 
 
 class SendFeedbackView(LoginRequiredMixin, CreateView):
+    """
+    Feedback form handle.
+
+    This one is providing logic for post request on feedback section page.
+    """
+
     form_class = CreateFeedbackForm
     template_name = 'marketapp/feedback-section.html'
 
@@ -36,6 +50,9 @@ class SendFeedbackView(LoginRequiredMixin, CreateView):
 
 
 class FeedbackSectionView(View):
+    """Feedback section page"""
+
+    # Combining context and logic
     def get(self, request, *args, **kwargs):
         view = FeedbackContextView.as_view()
         return view(request, *args, **kwargs)

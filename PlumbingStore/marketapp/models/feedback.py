@@ -9,7 +9,7 @@ class Feedback(models.Model):
     user = models.ForeignKey('usersapp.User',
                              on_delete=models.CASCADE,
                              null=True)
-
+    # Leave it denormalized so it's easier for search in feedback section
     advert = models.ForeignKey('Advertisment',
                                null=True,
                                on_delete=models.CASCADE)

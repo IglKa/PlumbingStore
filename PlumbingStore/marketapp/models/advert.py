@@ -7,6 +7,11 @@ from .company import Company
 
 
 class AdvertCategory(models.Model):
+    """Advert category"""
+
+    # Remade it like this because some categories might be not in the list.
+    # I'll do mechanism on form field that will be providing function to choose category firstly
+    # and then if user couldn't see the needed category he could create it himself.
     category_name = models.CharField(max_length=40)
 
     def __str__(self):
@@ -14,6 +19,7 @@ class AdvertCategory(models.Model):
 
 
 class Advertisment(models.Model):
+    # I will leave this like this, so the company name can be showed on post easily
     company = models.ForeignKey(Company,
                                 on_delete=models.CASCADE,
                                 null=True,
@@ -35,7 +41,8 @@ class Advertisment(models.Model):
                             db_index=True,
                             verbose_name='URL'
                             )
-
+    # TODO: End it up
+    # First time creating this type of Fields.
     star_rating = utils.AdvertRatingField(slug=slug,
                                           null=True,)
 
