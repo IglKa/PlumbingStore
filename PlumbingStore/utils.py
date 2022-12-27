@@ -53,26 +53,3 @@ class SlugHandle:
 
     def _methods_check(self):
         pass
-
-
-# TODO: end it normally and provide its logic.
-class AdvertRatingField(models.Field):
-    """
-    Rating Field for Advertisment.
-
-    Here this class field will look for all feedbacks of given advertisment
-    and then return arithmetic mean of rating
-    (each Feedback have a star that user gives while writing comment).
-    """
-
-    def __init__(self, slug=None, *args ,**kwargs):
-        self.slug = slug
-        super().__init__(*args, **kwargs)
-
-    def get_rating(self):
-        from marketapp.models import Feedback
-        feedbacks_query = Feedback.objects.filter(advert__slug=self.slug)
-        return round(sum(feedbacks_query) / len(feedbacks_query), 1)
-
-    def db_type(self, connection):
-        return 'float'

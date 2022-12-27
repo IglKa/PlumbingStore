@@ -2,7 +2,8 @@ from django.db import models
 from django.urls import reverse
 from django.utils import timezone
 
-import utils
+from django.contrib.contenttypes.fields import GenericRelation
+
 from .company import Company
 
 
@@ -23,7 +24,8 @@ class Advertisment(models.Model):
     company = models.ForeignKey(Company,
                                 on_delete=models.CASCADE,
                                 null=True,
-                                to_field='slug')
+                                to_field='slug'
+                                )
 
     category = models.ForeignKey(AdvertCategory,
                                  on_delete=models.PROTECT,
@@ -42,9 +44,14 @@ class Advertisment(models.Model):
                             verbose_name='URL'
                             )
     # TODO: End it up
-    # First time creating this type of Fields.
-    star_rating = utils.AdvertRatingField(slug=slug,
-                                          null=True,)
+    from .feedback import Feedback
+    star_rating = GenericRelation(Feedback,
+                                  null=True,
+                                  limit_choices_to={'advert': slug},
+                                  on_delete=models.SET_DEFAULT,
+                                  default=0,
+                                  related_query_name='advert_rating'
+                                  )
 
     def get_absolute_url(self):
         # Will return to company that advert belongs to.
