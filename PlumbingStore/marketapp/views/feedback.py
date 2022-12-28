@@ -1,62 +1,47 @@
-from django.contrib.auth.mixins import LoginRequiredMixin
-from django.views.generic import ListView, CreateView, View
-from django.views.generic.detail import SingleObjectMixin
+from django.shortcuts import render
+from django.views.generic import View
 
-from marketapp.models import Advertisment, Feedback
+from marketapp.models import Advertisment, Feedback, Company
 from marketapp.forms import CreateFeedbackForm
 from utils import AddContextMixin
 
 
-class FeedbackContextView(AddContextMixin, SingleObjectMixin, ListView):
-    """
-    Feedback Context View.
-
-    This will be providing context for feedback section page.
-    """
+class FeedbackSection(AddContextMixin, View):
 
     template_name = 'marketapp/feedback-section.html'
-
-    def get(self, request, *args, **kwargs):
-        self.object = self.get_object(queryset=Advertisment.objects.all())
-        return super().get(request, *args, **kwargs)
-
-    def get_context_data(self, *, object_list=None, **kwargs):
-        context = super().get_context_data(**kwargs)
-        # Because of little problem that separating Advertisment and Feedbacks
-        # cause, we need to give slug of advert to template(it's lately used on page title and form).
-        context['advert_slug'] = self.object.slug
-        context['menu'] = self.add_context()
-        context['form'] = CreateFeedbackForm()
-        return context
-
-    def get_queryset(self):
-        return self.object.feedback_set.all()
-
-
-class SendFeedbackView(LoginRequiredMixin, CreateView):
-    """
-    Feedback form handle.
-
-    This one is providing logic for post request on feedback section page.
-    """
-
     form_class = CreateFeedbackForm
-    template_name = 'marketapp/feedback-section.html'
 
-    def form_valid(self, form, *args, **kwargs):
-        form.instance.user = self.request.user
-        form.instance.advert = Advertisment.objects.get(slug=self.kwargs.get('slug'))
-        return super().form_valid(form)
+    def _find_feedbacks(self, slug=None):
+        self.slug = slug
+        models_to_search = [Advertisment, Company]
+        for Object in models_to_search:
+            try:
+                Object.objects.get(slug=slug)
+            except:
+                continue
+            else:
+                self.object = Object
 
+        feedbacks = Feedback.objects.filter(content_object=self.object)
+        return feedbacks
 
-class FeedbackSectionView(View):
-    """Feedback section page"""
-
-    # Combining context and logic
     def get(self, request, *args, **kwargs):
-        view = FeedbackContextView.as_view()
-        return view(request, *args, **kwargs)
+        feedbacks = self._find_feedbacks(slug=self.kwargs.get('slug'))
+
+        self.context = {
+            'object_slug': self.slug,
+            'form': self.form_class,
+            'feedbacks': feedbacks,
+            'menu': self.add_context()
+        }
+        return render(request, self.template_name, self.context)
 
     def post(self, request, *args, **kwargs):
-        view = SendFeedbackView.as_view()
-        return view(request, *args, **kwargs)
+        form = self.form_class(request.POST)
+        if form.is_valid():
+            form.instance.user = self.request.user
+            form.instance.content_object = self.object
+            form.save()
+            self.object.rating = get_object_rating(self.object)
+
+        return render(request, self.template_name, self.context)

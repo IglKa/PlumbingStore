@@ -43,15 +43,15 @@ class Advertisment(models.Model):
                             db_index=True,
                             verbose_name='URL'
                             )
-    # TODO: End it up
+
+    rating = models.FloatField(null=True,
+                               blank=True
+                               )
+
     from .feedback import Feedback
-    star_rating = GenericRelation(Feedback,
-                                  null=True,
-                                  limit_choices_to={'advert': slug},
-                                  on_delete=models.SET_DEFAULT,
-                                  default=0,
-                                  related_query_name='advert_rating'
-                                  )
+    feedbacks = GenericRelation(Feedback,
+                                related_query_name = 'advert_feedbacks'
+                                )
 
     def get_absolute_url(self):
         # Will return to company that advert belongs to.
