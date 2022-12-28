@@ -42,12 +42,14 @@ class Company(models.Model):
                             verbose_name='URL'
                             )
 
-    company_rating = GenericRelation(Feedback,
-                                     null=True,
-                                     on_delete=models.SET_DEFAULT,
-                                     default=0,
-                                     limit_choices_to={'company': slug},
-                                     )
+    rating = models.FloatField(null=True,
+                               blank=True
+                               )
+
+    feedbacks = GenericRelation(Feedback,
+                                related_query_name='company_feedbacks'
+                                )
+
     def get_absolute_url(self):
         return reverse('marketapp:company', kwargs={'slug': self.slug})
 

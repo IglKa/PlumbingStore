@@ -1,6 +1,6 @@
 from django import forms
 
-from .models import Feedback, Advertisment, Star
+from .models import Feedback, Advertisment
 
 
 class CreateAdvertForm(forms.ModelForm):
@@ -11,10 +11,10 @@ class CreateAdvertForm(forms.ModelForm):
 
 
 class CreateFeedbackForm(forms.ModelForm):
-    star_given = forms.ModelChoiceField(queryset=Star.objects.all(),
-                                        widget=forms.RadioSelect,
-                                        empty_label=None)
+    rating = forms.ChoiceField(widget=forms.RadioSelect,
+                               empty_label=None
+                               )
 
     class Meta:
         model = Feedback
-        fields = ['text', 'image', 'star_given']
+        fields = ['text', 'image', 'rating']

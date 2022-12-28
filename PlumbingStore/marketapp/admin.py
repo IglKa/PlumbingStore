@@ -17,14 +17,15 @@ admin.site.register(CompanyCategory)
 class AdvertAdmin(admin.ModelAdmin):
     list_display = ['category', 'company', 'title',
                     'description', 'date_posted', 'slug',
-                    'star_rating'
+                    'rating'
                     ]
 
 
 @admin.register(Company)
 class CompanyAdmin(admin.ModelAdmin):
     list_display = ['category', 'name',
-                    'descr', 'date_created', 'slug'
+                    'descr', 'date_created', 'slug',
+                    'rating'
                     ]
 
 
