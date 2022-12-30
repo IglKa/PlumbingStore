@@ -13,14 +13,14 @@
 {% block content %}
     <div class="advert-feedback-section">
         <div class="form-section">
-            <form href="{% url 'marketapp:feedback-section' advert_slug %}" method="post">
+            <form href="{% url 'marketapp:feedback-section' object_slug %}" method="post">
                 {% csrf_token %}
                 {{ form }}
                 <button type="submit">Send Feedback</button>
             </form>
         </div>
         <hr>
-        {% for f in object_list %}
+        {% for f in feedbacks %}
             <div class="advert-feedback">
                 <div class="advert-feedback-head">
                     <div class="advert-feedback-head-user">
@@ -33,7 +33,7 @@
                 <hr>
                 <div class="advert-feedback-content">
                     <div class="advert-feedback-content-star">
-                        {{ f.star_given }}
+                        {{ f.rating }}
                     </div>
                     <div class="advert-feedback-content-text">
                         {{ f.text }}

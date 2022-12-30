@@ -12,7 +12,7 @@ class CreateAdvertForm(forms.ModelForm):
 
 class CreateFeedbackForm(forms.ModelForm):
     rating = forms.ChoiceField(widget=forms.RadioSelect,
-                               empty_label=None
+                               choices=Feedback.Star.choices
                                )
 
     class Meta:

@@ -23,6 +23,7 @@
             </a>
         </div>
         {% endfor %}
+        <a href="{% url 'marketapp:feedback-section' company.slug %}">See feedbacks</a>
     </div>
 </div>
 {% endblock %}
