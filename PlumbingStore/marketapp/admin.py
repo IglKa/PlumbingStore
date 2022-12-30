@@ -4,7 +4,6 @@ from django.db import models
 from .models import Advertisment,\
                     Feedback, \
                     Company, \
-                    Star, \
                     AdvertCategory, \
                     CompanyCategory
 
@@ -27,6 +26,3 @@ class CompanyAdmin(admin.ModelAdmin):
                     'descr', 'date_created', 'slug',
                     'rating'
                     ]
-
-
-admin.site.register(Star)
