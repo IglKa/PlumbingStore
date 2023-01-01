@@ -1,0 +1,32 @@
+from typing import Union
+
+from django.db.models import QuerySet
+from django.http import Http404
+
+from .models import Advertisment, Company
+
+
+def update_rating(model_instance):
+    ratings = model_instance.feedbacks.all().values_list('rating', flat=True)
+    model_instance.rating = round(sum(ratings) / len(ratings), 1)
+    model_instance.save()
+
+def find_feedbacks(model_instance) -> QuerySet:
+    feedbacks = model_instance.feedbacks.all()
+    return feedbacks
+
+
+def get_model_instance(slug: str) -> Union[Advertisment, Company]:
+    """
+    I think that this view will be something like 'generic'.
+    It would find either Advertisment or Company (based on the given slug).
+    """
+    models_to_search = [Advertisment, Company]
+    for Object in models_to_search:
+        try:
+            model_instance = Object.objects.get(slug=slug)
+        except:
+            continue
+        else:
+            return model_instance
+    raise Http404

@@ -9,9 +9,6 @@ menu_block = [
     # {'title': 'Settings', 'url_name': 'settingsapp:mainmenu'},
 ]
 
-def get_object_rating(object):
-    ratings = Feedback.objects.filter(content_object=object).values_list('rating', flat=True)
-    return round(sum(ratings) / len(ratings), 1)
 
 class AddContextMixin:
     """The Mixin that adds all context needed for the site"""
