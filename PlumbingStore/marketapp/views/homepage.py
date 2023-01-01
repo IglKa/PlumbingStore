@@ -4,7 +4,7 @@ from marketapp.models import Advertisment
 import utils
 
 
-class MarketHome(utils.AddContextMixin, ListView):
+class MarketHome(ListView):
     """Main Home Page"""
 
     model = Advertisment
@@ -14,5 +14,5 @@ class MarketHome(utils.AddContextMixin, ListView):
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super().get_context_data(**kwargs)
         # Adding context from Mixin
-        addable_context = self.add_context()
+        addable_context = utils.add_context()
         return dict(list(context.items()) + list(addable_context.items()))

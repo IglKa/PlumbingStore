@@ -7,11 +7,14 @@ from .models import Advertisment, Company
 
 
 def update_rating(model_instance):
-    ratings = model_instance.feedbacks.all().values_list('rating', flat=True)
+    """Update rating for either Advertisment or Company"""
+    ratings = find_feedbacks(model_instance).values_list('rating', flat=True)
     model_instance.rating = round(sum(ratings) / len(ratings), 1)
     model_instance.save()
 
+
 def find_feedbacks(model_instance) -> QuerySet:
+    """Find feedbacks for given object"""
     feedbacks = model_instance.feedbacks.all()
     return feedbacks
 

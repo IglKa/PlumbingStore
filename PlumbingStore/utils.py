@@ -10,13 +10,10 @@ menu_block = [
 ]
 
 
-class AddContextMixin:
-    """The Mixin that adds all context needed for the site"""
-
-    def add_context(self, **kwargs):
-        context = kwargs
-        context['menu'] = menu_block
-        return context
+def add_context(**kwargs):
+    context = kwargs
+    context['menu'] = menu_block
+    return context
 
 
 class SlugHandle:

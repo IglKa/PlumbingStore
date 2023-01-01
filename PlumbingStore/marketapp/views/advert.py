@@ -1,12 +1,12 @@
 from django.views.generic import DetailView
 
-from marketapp.models import Advertisment, Feedback, Company
-from utils import AddContextMixin
+from marketapp.models import Advertisment
+from utils import add_context
 
 
 # I had to separate Advertisment page and Feedback section for
 # lowering queries that was going to DB.
-class AdvertDetailView(AddContextMixin, DetailView):
+class AdvertDetailView(DetailView):
     """Advertisment detail"""
 
     model = Advertisment
@@ -15,7 +15,7 @@ class AdvertDetailView(AddContextMixin, DetailView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['menu'] = self.add_context()
+        context['menu'] = add_context()
         return context
 
 # Might provide some logic here, but for now leaving it till later.
