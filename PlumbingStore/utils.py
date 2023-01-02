@@ -3,7 +3,6 @@ from django.db import models
 
 
 # Menu block for templates
-# TODO: Think better on functional that menu block will provide
 menu_block = [
     # Settings
     # {'title': 'Settings', 'url_name': 'settingsapp:mainmenu'},
