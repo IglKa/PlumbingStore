@@ -3,10 +3,11 @@
 {% block title %}Registration{% endblock %}
 
 {% block content %}
-<form method="post" action="{% url 'usersapp:registration' %}">
+
+<form method="post">
     {% csrf_token %}
     {{ form }}
-    <button type="submit">Регестрация</button>
+    <button type="submit">Registration</button>
 </form>
 
 {% endblock %}

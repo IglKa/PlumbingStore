@@ -3,9 +3,10 @@
 {% block title %}Login{% endblock %}
 
 {% block content %}
-<form action="{% url 'usersapp:login' %}"  method="post">
-    {{ form }}
+
+<form method="post">
     {% csrf_token %}
+    {{ form }}
     <button type="submit">Login</button>
 </form>
 

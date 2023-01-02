@@ -31,4 +31,4 @@ class User(AbstractUser):
     REQUIRED_FIELDS = ["username"]
 
     def get_absolute_url(self):
-        return reverse('marketapp:homepage')
+        return reverse('usersapp:login')
