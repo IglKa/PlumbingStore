@@ -6,8 +6,10 @@ from django.http import Http404
 from .models import Advertisment, Company
 
 
+# TODO: Provide logic for Follow
 def update_rating(model_instance):
     """Update rating for either Advertisment or Company"""
+
     ratings = find_feedbacks(model_instance).values_list('rating', flat=True)
     model_instance.rating = round(sum(ratings) / len(ratings), 1)
     model_instance.save()
@@ -15,6 +17,7 @@ def update_rating(model_instance):
 
 def find_feedbacks(model_instance) -> QuerySet:
     """Find feedbacks for given object"""
+
     feedbacks = model_instance.feedbacks.all()
     return feedbacks
 
@@ -24,6 +27,7 @@ def get_model_instance(slug: str) -> Union[Advertisment, Company]:
     I think that this view will be something like 'generic'.
     It would find either Advertisment or Company (based on the given slug).
     """
+
     models_to_search = [Advertisment, Company]
     for Object in models_to_search:
         try:

@@ -5,6 +5,8 @@ from marketapp.businesslogic import get_model_instance
 
 
 class FollowCompany(CreateView):
+    """Logic for following company"""
+
     model = Follow
     template_name = 'marketapp/company.html'
 

@@ -2,8 +2,6 @@ from django.urls import reverse_lazy
 from django.views.generic import DetailView, CreateView
 from django.contrib.auth.mixins import LoginRequiredMixin
 
-from django.contrib.auth.views import LoginView, LogoutView
-
 from .forms import UserForm
 from .models import User
 from .services import end_registration
@@ -25,10 +23,3 @@ class UserCreation(CreateView):
         form.save()
         end_registration(self.request, form)
         return super().form_valid(form)
-
-
-class UserLogin(LoginView):
-    template_name = 'usersapp/login.html'
-
-class UserLogout(LogoutView):
-    pass
