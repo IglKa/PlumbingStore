@@ -7,7 +7,7 @@ from marketapp.models import Company
 class TypeOfActivity(models.TextChoices):
     SELF_EMPLOYED = 'SELF-EMPLOYED', 'Self-employed'
     COMPANY_PERSONNEL = 'COMPANY PERSONNEL', 'Company personnel'
-    NOT_A_WORKER = 'NOT A WORKER', 'Consumer'
+    NOT_A_WORKER = 'NOT A WORKER', 'Consumer' # Represents a user that is off the work or just a Customer
 
 
 class EmployeePosition(models.Model):
