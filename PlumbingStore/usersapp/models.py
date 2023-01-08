@@ -28,7 +28,7 @@ class EmployeePosition(models.Model):
 
     def __str__(self):
         if self.type_of_activity == 'NOT A WORKER':
-            return f'{self.type_of_activity}'
+            return f'{self.type_of_activity} | off the work'
         return f'{self.type_of_activity} - {self.position}'
 
 
