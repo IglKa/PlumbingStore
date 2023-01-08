@@ -10,3 +10,5 @@ __all__ = [
     'Feedback',
     'Follow',
 ]
+
+# TODO: class RepairRequest, class Resume.

@@ -4,12 +4,32 @@ from django.db import models
 from marketapp.models import Company
 
 
+class TypeOfActivity(models.TextChoices):
+    SELF_EMPLOYED = 'SELF-EMPLOYED', 'Self-employed'
+    COMPANY_PERSONNEL = 'COMPANY PERSONNEL', 'Company personnel'
+    NOT_A_WORKER = 'NOT A WORKER', 'Consumer'
+
+
 class EmployeePosition(models.Model):
-    # Also adding employee position field, so client can recognize from who he is buying goods.
-    position = models.CharField(max_length=40)
+    """
+    Employee position.
+    Will show the user type of activity
+    (he might be either self-employed or a company personnel).
+    """
+
+    type_of_activity = models.CharField(choices=TypeOfActivity.choices,
+                                        default=TypeOfActivity.NOT_A_WORKER,
+                                        max_length=20,
+                                        )
+
+    position = models.CharField(max_length=40,
+                                null=True,
+                                blank=True)
 
     def __str__(self):
-        return f'{self.position}'
+        if self.type_of_activity == 'NOT A WORKER':
+            return f'{self.type_of_activity}'
+        return f'{self.type_of_activity} - {self.position}'
 
 
 class User(AbstractUser):
@@ -30,19 +50,20 @@ class User(AbstractUser):
                                        default=None,
                                        null=True
                                        )
-
-    employee_position = models.ForeignKey(EmployeePosition,
-                                          on_delete=models.SET_NULL,
-                                          blank=True,
-                                          null=True
-                                          )
-
     # Company where user works
     company = models.ForeignKey(Company,
                                 on_delete=models.CASCADE,
                                 null=True,
                                 blank=True
                                 )
+    position = models.ForeignKey(EmployeePosition,
+                                    blank=True,
+                                    null=True,
+                                    on_delete=models.SET_NULL,
+                                    )
 
     USERNAME_FIELD = "email"
     REQUIRED_FIELDS = ["username"]
+
+    def __str__(self):
+        return f'{self.email}'

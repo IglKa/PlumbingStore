@@ -1,14 +1,16 @@
-from django.urls import reverse_lazy
 from django.views.generic import DetailView, CreateView
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.urls import reverse_lazy
+from django.contrib.auth import authenticate, login
 
-from .forms import UserForm
 from .models import User
-from .services import end_registration
+from .forms import UserForm
+# from .services import end_registration
 
 
 class ProfileView(LoginRequiredMixin, DetailView):
     """ User Profile Page"""
+
     model = User
     template_name = 'usersapp/profile.html'
     context_object_name = 'profile'
@@ -21,5 +23,8 @@ class UserCreation(CreateView):
 
     def form_valid(self, form):
         form.save()
-        end_registration(self.request, form)
+        email = form.cleaned_data.get('email')
+        password = form.cleaned_data.get('password1')
+        user = authenticate(self.request, username=email, password=password)
+        login(self.request, user=user)
         return super().form_valid(form)

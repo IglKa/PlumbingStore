@@ -8,24 +8,24 @@ from marketapp.forms import CreateAdvertForm
 from marketapp.models import Advertisment, Company
 
 
-class CreateCompany(CreateView):
-    """Creating company logic"""
+#class CreateCompany(CreateView):
+  #  """Creating company logic"""
 
     # TODO: Think better on how this process will be going, what user needs to input for it, what data to store.
-    model = Company
-    template_name = 'marketapp/createcompany.html'
-    fields = [
-        'category',
-        'name', 'descr',
-        'header_image',
-        'profile_image',
-              ]
+   # model = Company
+   # template_name = 'marketapp/createcompany.html'
+   # fields = [
+  #      'category',
+   #     'name', 'descr',
+    #    'header_image',
+   #     'profile_image',
+    #          ]
 
-    def form_valid(self, form):
-        form.instance.user = self.request.user
-        slug = utils.SlugHandle(slug_text=[form.instance.name])
-        form.instance.slug = slug.form_slug_text()
-        return super().form_valid(form)
+ #   def form_valid(self, form):
+    #    form.instance.user = self.request.user
+      #  slug = utils.SlugHandle(slug_text=[form.instance.name])
+   #     form.instance.slug = slug.form_slug_text()
+   #     return super().form_valid(form)
 
 
 # Same concept as with advert page.

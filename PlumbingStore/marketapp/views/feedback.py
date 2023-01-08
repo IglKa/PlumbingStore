@@ -36,4 +36,4 @@ class FeedbackSection(View):
             form.instance.content_object = model_instance
             form.save()
             update_rating(model_instance)
-            return render(request, self.template_name, self._get_context(slug))
+        return render(request, self.template_name, self._get_context(slug))
