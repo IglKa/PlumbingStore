@@ -30,6 +30,7 @@
                         {{ user.first_name }}<br>
                         {{ user.email }}
                     </a>
+                    <br>
                     <a href="{% url 'usersapp:logout' %}">Logout</a><br>
                 </div>
                 <hr>
@@ -52,7 +53,6 @@
             {% else %}
                 <a href="{% url 'usersapp:login' %}">Login</a>
                 <a href="{% url 'usersapp:registration' %}">Registration</a>
-
             {% endif %}
         </div>
     {% endblock%}
