@@ -28,6 +28,7 @@ def get_model_instance(slug: str) -> Union[Advertisment, Company]:
     It would find either Advertisment or Company (based on the given slug).
     """
 
+    #TODO: Lately try to re-do this cuz it looks assly ugly.
     models_to_search = [Advertisment, Company]
     for Object in models_to_search:
         try:

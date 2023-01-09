@@ -1,7 +1,7 @@
 from django.views.generic.edit import CreateView
 
 from marketapp.models import Follow
-from marketapp.businesslogic import get_model_instance
+from marketapp.services import get_model_instance
 
 
 class FollowCompany(CreateView):

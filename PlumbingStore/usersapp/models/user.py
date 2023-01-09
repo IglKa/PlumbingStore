@@ -4,7 +4,15 @@ from django.contrib.auth.models import AbstractUser
 
 
 class User(AbstractUser):
-    # There is no need to use username in site, so we will use email as username.
+    """
+    User model.
+
+    Phone number there will be necessary for phone calls between users
+    (and if I am going to be in the mood, I'll try to do this in site).
+    Usernames are not necessary, because the type of my site needs emails
+    firstly than nicknames(I think so).
+    """
+
     username = models.CharField(max_length=45,
                                 blank=True,
                                 unique=False,
@@ -21,6 +29,7 @@ class User(AbstractUser):
                                        default=None,
                                        null=True)
 
+    # As I said, here is no need to use username on site, so we will use email as username.
     USERNAME_FIELD = "email"
     REQUIRED_FIELDS = ["username"]
 
