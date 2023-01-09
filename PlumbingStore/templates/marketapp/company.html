@@ -4,11 +4,11 @@
 {% block title %}PlumbingStore | {{company.name}}{% endblock %}
 {% block content %}
 <div>
-    <h1>{{company.name}}</h1>
+    <h1>{{ company.name }}</h1>
 </div>
 <hr>
 <div>
-    <h3>{{company.descr}}</h3>
+    <h3>{ {company.descr }}</h3>
 </div>
 <div>
     <form action="{% url 'marketapp:company' company.slug %}" method="post">

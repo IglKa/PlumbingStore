@@ -24,6 +24,3 @@ class Follow(models.Model):
                                 null=True,
                                 blank=True,
                                 )
-
-    def get_absolute_url(self):
-        return reverse('marketapp:company', kwargs={'slug', self.company__slug})

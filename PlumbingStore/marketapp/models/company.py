@@ -6,6 +6,7 @@ from django.contrib.contenttypes.fields import GenericRelation
 
 from .feedback import Feedback
 
+
 class CompanyCategory(models.Model):
     """Company category"""
 
@@ -53,7 +54,7 @@ class Company(models.Model):
         return reverse('marketapp:company', kwargs={'slug': self.slug})
 
     def __str__(self):
-        return self.slug
+        return f'{self.slug}'
 
 
 class CompanyHolder(models.ForeignKey):

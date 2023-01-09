@@ -10,7 +10,6 @@ class CompanyDetail(SingleObjectMixin, ListView):
 
     model = Company
     template_name = 'marketapp/company.html'
-    form = FollowForm
 
     def get(self, request, *args, **kwargs):
         self.object = self.get_object(queryset=Company.objects.filter(slug=kwargs.get('slug')))
@@ -19,7 +18,7 @@ class CompanyDetail(SingleObjectMixin, ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['company'] = self.object
-        context['form'] = self.form()
+        context['form'] = FollowForm()
         return context
 
     def get_queryset(self):
