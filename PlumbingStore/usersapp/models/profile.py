@@ -1,12 +1,14 @@
 from django.db import models
 
 from marketapp.models import Company
-from .employee_position import EmployeePosition
-from .user import User
+
 
 
 class Profile(models.Model):
     """Main profile model."""
+
+    from .employee_position import EmployeePosition
+    from .user import User
 
     user = models.OneToOneField(User,
                                 on_delete=models.CASCADE)

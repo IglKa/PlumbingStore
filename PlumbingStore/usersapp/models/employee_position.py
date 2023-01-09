@@ -1,5 +1,7 @@
 from django.db import models
 
+from django.contrib.auth.models import Group
+
 
 class EmployeePosition(models.Model):
     """
@@ -11,14 +13,14 @@ class EmployeePosition(models.Model):
     this position if necessary(give it category, rename it and even delete).
     """
 
-    position_category = models.ForeignKey('self',
-                               on_delete=models.CASCADE,
-                               blank=True,
-                               null=True)
+    position_group = models.ForeignKey(Group,
+                                       on_delete=models.PROTECT,
+                                       blank=True,
+                                       null=True)
 
     position = models.CharField(max_length=100)
 
     def __str__(self):
-        if self.position_category:
-            return f'{self.position_category} - {self.position}'
+        if self.position_group:
+            return f'{self.position_group} - {self.position}'
         return f'{self.position}'
