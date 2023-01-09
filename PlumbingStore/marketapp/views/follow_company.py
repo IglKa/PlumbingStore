@@ -1,7 +1,8 @@
 from django.views.generic.edit import CreateView
 
 from marketapp.models import Follow
-from marketapp.services import get_model_instance
+from marketapp.services import set_follow
+from marketapp.forms import FollowForm
 
 
 class FollowCompany(CreateView):
@@ -9,9 +10,8 @@ class FollowCompany(CreateView):
 
     model = Follow
     template_name = 'marketapp/company.html'
+    form_class = FollowForm
 
     def form_valid(self, form):
-        user = self.request.user
-        form.instance.user = user
-        form.instance.company = get_model_instance(self.request.POST.get('slug'))
+        set_follow(self.request, form)
         return super().form_valid(form)

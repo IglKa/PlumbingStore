@@ -5,16 +5,25 @@ from .company import Company
 
 
 class Follow(models.Model):
+    """
+    User following company.
+
+    This model represents follow(or subscribe? whatever) activity of user.
+    Following company's ads will appear in mostly.
+    And after user scrolled all following, the ones with high rating
+    (recommendations) will appear.
+    """
+
     company = models.ForeignKey(Company,
                                 on_delete=models.CASCADE,
                                 blank=True,
                                 null=True,
                                 )
-    user = models.ForeignKey('usersapp.User',
-                             on_delete=models.CASCADE,
-                             null=True,
-                             blank=True,
-                             )
+    profile = models.ForeignKey('usersapp.Profile',
+                                on_delete=models.CASCADE,
+                                null=True,
+                                blank=True,
+                                )
 
     def get_absolute_url(self):
-        return reverse('marketapp:company', kwargs={'slug', self.company.slug})
+        return reverse('marketapp:company', kwargs={'slug', self.company__slug})

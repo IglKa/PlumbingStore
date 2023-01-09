@@ -4,6 +4,7 @@ from django.db.models import QuerySet
 from django.http import Http404
 
 from .models import Advertisment, Company
+import usersapp.services as user_serv
 
 
 # TODO: Provide logic for Follow
@@ -38,3 +39,9 @@ def get_model_instance(slug: str) -> Union[Advertisment, Company]:
         else:
             return model_instance
     raise Http404
+
+
+def set_follow(request, form) -> None:
+    """Ends follow request"""
+    form.instance.profile = user_serv.get_user_profile(request)
+    form.instance.company = get_model_instance(request.POST.get('slug'))

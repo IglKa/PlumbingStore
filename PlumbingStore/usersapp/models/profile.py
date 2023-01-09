@@ -24,4 +24,4 @@ class Profile(models.Model):
                                  on_delete=models.SET_NULL)
 
     def __str__(self):
-        return f'{self.pk} - {self.user}'
+        return f'{self.user.email}'

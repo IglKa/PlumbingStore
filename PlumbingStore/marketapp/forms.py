@@ -1,6 +1,6 @@
 from django import forms
 
-from .models import Feedback, Advertisment
+from .models import Feedback, Advertisment, Follow
 
 
 class CreateAdvertForm(forms.ModelForm):
@@ -17,3 +17,9 @@ class CreateFeedbackForm(forms.ModelForm):
     class Meta: 
         model = Feedback
         fields = ['text', 'image', 'rating']
+
+
+class FollowForm(forms.ModelForm):
+    class Meta:
+        model = Follow
+        fields = ()
