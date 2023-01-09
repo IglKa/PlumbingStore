@@ -3,7 +3,7 @@
 {% block title %}Create Advert{% endblock %}
 
 {% block content %}
-<form method="post" action="{% url 'marketapp:create-adv' user.company %}">
+<form method="post" action="{% url 'marketapp:create-adv' user.profile.company %}">
     {% csrf_token %}
     <div>
         <!-- TODO: При выборе категории появление поля цена-->

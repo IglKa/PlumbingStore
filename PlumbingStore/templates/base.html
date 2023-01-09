@@ -36,9 +36,9 @@
                 <hr>
                 <div class="other-links">
                     <a href="{% url 'marketapp:homepage' %}">Home</a><br>
-                    {% if user.company %}
-                        <a href="{% url 'marketapp:create-adv' user.company.slug %}">Create Advert</a><br>
-                        <a href="{% url 'marketapp:company' user.company %}">My company</a><br>
+                    {% if user.profile.company %}
+                        <a href="{% url 'marketapp:create-adv' user.profile.company.slug %}">Create Advert</a><br>
+                        <a href="{% url 'marketapp:company' user.profile.company %}">My company</a><br>
                     {% endif %}
                     <a href="#">Settings</a><br>
                     {% for m in menu %}

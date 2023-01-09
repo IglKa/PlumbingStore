@@ -6,7 +6,6 @@ from django.contrib.contenttypes.fields import GenericRelation
 
 from .feedback import Feedback
 
-
 class CompanyCategory(models.Model):
     """Company category"""
 
@@ -58,7 +57,6 @@ class Company(models.Model):
 
 
 class CompanyHolder(models.ForeignKey):
-    # Made this table for more comfortable and useful search for holder
     holder = models.ForeignKey('usersapp.User',
                                on_delete=models.CASCADE,
                                null=True

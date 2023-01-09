@@ -3,7 +3,6 @@ from django.db import models
 from marketapp.models import Company
 
 
-
 class Profile(models.Model):
     """Main profile model."""
 
