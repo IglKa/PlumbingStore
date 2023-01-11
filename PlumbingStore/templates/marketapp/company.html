@@ -8,12 +8,12 @@
 </div>
 <hr>
 <div>
-    <h3>{ {company.descr }}</h3>
+    <h3>{{ company.descr }}</h3>
 </div>
 <div>
     <form action="{% url 'marketapp:company' company.slug %}" method="post">
-        {% csrf_token %}
         {{ form }}
+        {% csrf_token %}
         <button type="submit">Follow</button>
     </form>
 </div>
