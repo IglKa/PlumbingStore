@@ -4,9 +4,9 @@ from django.db.models import QuerySet
 from django.http import Http404
 
 from mainapp.models import Advertisment, Company
+from utils import add_context
 
 
-# TODO: Provide logic for Follow
 def update_rating(model_instance):
     """Update rating for either Advertisment or Company"""
 
@@ -38,3 +38,24 @@ def get_model_instance(slug: str) -> Union[Advertisment, Company]:
         else:
             return model_instance
     raise Http404
+
+
+def get_feedback_section_context(slug, form, ):
+    context = {
+        'object_slug': slug,
+        'form': form,
+        'feedbacks': find_feedbacks(get_model_instance(slug)),
+        'menu': add_context()
+    }
+    return context
+
+
+def create_feedback_instance(user, form, model_instance):
+    form.instance.user = user
+    form.instance.content_object = model_instance
+    form.save()
+
+
+def end_feedback_post_logic(user, form, model_instance):
+    create_feedback_instance(user, form, model_instance)
+    update_rating(model_instance)

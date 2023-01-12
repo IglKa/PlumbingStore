@@ -1,10 +1,10 @@
 from django.shortcuts import render
 from django.views.generic import View
+from django.contrib.auth.decorators import login_required
 
 from .forms import CreateFeedbackForm
-from .services import get_model_instance, \
-    update_rating, \
-    find_feedbacks
+from .services import get_feedback_section_context, get_model_instance, end_feedback_post_logic
+
 
 
 class FeedbackSection(View):
@@ -13,26 +13,18 @@ class FeedbackSection(View):
     template_name = 'marketapp/feedback-section.html'
     form_class = CreateFeedbackForm
 
-    def _get_context(self, slug):
-        self.context = {
-            'object_slug': slug,
-            'feedbacks': find_feedbacks(get_model_instance(slug)),
-            'form': self.form_class,
-            'menu': utils.add_context()
-        }
-        return self.context
+    def _get_model_instance(self, slug):
+        self.model_instance = get_model_instance(slug)
+        return self.model_instance
 
     def get(self, request, **kwargs):
         slug = kwargs.get('slug')
-        return render(request, self.template_name, self._get_context(slug))
+        return render(request, self.template_name, get_feedback_section_context(slug=slug, form=self.form_class))
 
+    @login_required
     def post(self, request, **kwargs):
         form = self.form_class(request.POST)
         slug = kwargs.get('slug')
-        model_instance = get_model_instance(slug)
         if form.is_valid():
-            form.instance.user = self.request.user
-            form.instance.content_object = model_instance
-            form.save()
-            update_rating(model_instance)
-        return render(request, self.template_name, self._get_context(slug))
+            end_feedback_post_logic(request.user, form, self._get_model_instance(slug))
+        return render(request, self.template_name, get_feedback_section_context(slug=slug, form=self.form_class))
