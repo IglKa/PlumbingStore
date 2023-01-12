@@ -7,7 +7,28 @@ from mainapp.models import Advertisment, Company
 from utils import add_context
 
 
-def update_rating(model_instance):
+def get_feedback_section_context(slug, form) -> dict:
+    context = {
+        'object_slug': slug,
+        'form': form,
+        'feedbacks': find_feedbacks(get_model_instance(slug)),
+        'menu': add_context()
+    }
+    return context
+
+
+def end_feedback_post_logic(user, form, model_instance) -> None:
+    create_feedback_instance(user, form, model_instance)
+    update_rating(model_instance)
+
+
+def create_feedback_instance(user, form, model_instance) -> None:
+    form.instance.user = user
+    form.instance.content_object = model_instance
+    form.save()
+
+
+def update_rating(model_instance) -> None:
     """Update rating for either Advertisment or Company"""
 
     ratings = find_feedbacks(model_instance).values_list('rating', flat=True)
@@ -38,24 +59,3 @@ def get_model_instance(slug: str) -> Union[Advertisment, Company]:
         else:
             return model_instance
     raise Http404
-
-
-def get_feedback_section_context(slug, form, ):
-    context = {
-        'object_slug': slug,
-        'form': form,
-        'feedbacks': find_feedbacks(get_model_instance(slug)),
-        'menu': add_context()
-    }
-    return context
-
-
-def create_feedback_instance(user, form, model_instance):
-    form.instance.user = user
-    form.instance.content_object = model_instance
-    form.save()
-
-
-def end_feedback_post_logic(user, form, model_instance):
-    create_feedback_instance(user, form, model_instance)
-    update_rating(model_instance)

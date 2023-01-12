@@ -1,14 +1,14 @@
 from django.views.generic import ListView
 from django.views.generic.detail import SingleObjectMixin
 
-from marketapp.models import Advertisment, Company
+from mainapp.models import Advertisment, Company
 
 
 class CompanyDetail(SingleObjectMixin, ListView):
     """Company Page"""
 
     model = Company
-    template_name = 'marketapp/company.html'
+    template_name = 'mainapp/company.html'
 
     def get(self, request, *args, **kwargs):
         self.object = self.get_object(queryset=Company.objects.filter(slug=kwargs.get('slug')
