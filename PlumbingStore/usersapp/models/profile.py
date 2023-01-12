@@ -1,6 +1,6 @@
 from django.db import models
 
-from marketapp.models import Company
+from mainapp.models import Company
 
 
 class Profile(models.Model):

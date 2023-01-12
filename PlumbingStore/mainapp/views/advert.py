@@ -1,6 +1,6 @@
 from django.views.generic import DetailView
 
-from marketapp.models import Advertisment
+from mainapp.models import Advertisment
 from utils import add_context
 
 

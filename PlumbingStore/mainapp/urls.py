@@ -3,7 +3,7 @@ from django.contrib.auth.decorators import login_required
 
 from .views import *
 
-app_name = 'marketapp'
+app_name = 'mainapp'
 urlpatterns = [
     path('', MarketHome.as_view(), name='homepage'),
 

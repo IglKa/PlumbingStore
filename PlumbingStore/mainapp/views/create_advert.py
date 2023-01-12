@@ -1,8 +1,8 @@
 from django.views.generic.edit import CreateView
 
 import utils
-from marketapp.forms import CreateAdvertForm
-from marketapp.models import Advertisment, Company
+from mainapp.forms import CreateAdvertForm
+from mainapp.models import Advertisment, Company
 
 
 class CreateAdvert(CreateView):

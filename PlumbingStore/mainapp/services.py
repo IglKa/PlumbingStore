@@ -3,8 +3,7 @@ from typing import Union
 from django.db.models import QuerySet
 from django.http import Http404
 
-from .models import Advertisment
-from companyapp.models import Company
+from .models import Advertisment, Company
 
 
 # TODO: Provide logic for Follow

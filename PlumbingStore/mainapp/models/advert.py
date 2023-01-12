@@ -5,6 +5,8 @@ from django.utils import timezone
 from django.contrib.contenttypes.fields import GenericRelation
 
 
+
+
 class AdvertCategory(models.Model):
     """Advert category"""
 
@@ -22,7 +24,7 @@ class Advertisment(models.Model):
 
     # I will leave it denormalized, so the company name can be showed
     # on post easily and for queries for a particular company adverts.
-    from companyapp.models import Company
+    from .company import Company
     company = models.ForeignKey(Company,
                                 on_delete=models.CASCADE,
                                 null=True,

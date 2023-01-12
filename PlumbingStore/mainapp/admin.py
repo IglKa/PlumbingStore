@@ -2,8 +2,7 @@ from django.contrib import admin
 
 from .models import Advertisment, \
     Feedback, \
-    AdvertCategory, \
-    Advertisment
+    AdvertCategory
 
 
 admin.site.register(Feedback)

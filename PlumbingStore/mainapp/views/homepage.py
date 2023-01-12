@@ -1,7 +1,7 @@
 from django.views.generic import ListView
 
 import utils
-from marketapp.models import Advertisment
+from mainapp.models import Advertisment
 
 
 class MarketHome(ListView):

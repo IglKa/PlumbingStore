@@ -3,7 +3,7 @@ from django.urls import reverse
 
 
 class Follow(models.Model):
-    from .company import Company
+    from mainapp.models import Company
     company = models.ForeignKey(Company,
                                 on_delete=models.CASCADE,
                                 null=True,

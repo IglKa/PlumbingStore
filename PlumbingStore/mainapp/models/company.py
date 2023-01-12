@@ -16,7 +16,6 @@ class CompanyCategory(models.Model):
 
 
 class Company(models.Model):
-    from marketapp.models import Feedback
 
     category = models.ForeignKey(CompanyCategory,
                                  null=True,
@@ -45,7 +44,7 @@ class Company(models.Model):
     rating = models.FloatField(null=True,
                                blank=True
                                )
-
+    from .feedback import Feedback
     feedbacks = GenericRelation(Feedback,
                                 related_query_name='company_feedbacks'
                                 )
