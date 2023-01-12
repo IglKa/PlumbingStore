@@ -52,7 +52,7 @@ class Advertisment(models.Model):
                                blank=True
                                )
 
-    from .feedback import Feedback
+    from feedbacksapp.models import Feedback
     feedbacks = GenericRelation(Feedback,
                                 related_query_name = 'advert_feedbacks'
                                 )

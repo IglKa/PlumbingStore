@@ -1,11 +1,8 @@
 from django.contrib import admin
 
-from .models import Advertisment, \
-    Feedback, \
-    AdvertCategory
+from .models import Advertisment, AdvertCategory
 
 
-admin.site.register(Feedback)
 admin.site.register(AdvertCategory)
 
 

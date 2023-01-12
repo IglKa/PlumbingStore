@@ -1,8 +1,8 @@
 from django.shortcuts import render
 from django.views.generic import View
 
-from mainapp.forms import CreateFeedbackForm
-from mainapp.services import get_model_instance, \
+from .forms import CreateFeedbackForm
+from .services import get_model_instance, \
     update_rating, \
     find_feedbacks
 

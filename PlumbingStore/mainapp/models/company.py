@@ -44,7 +44,7 @@ class Company(models.Model):
     rating = models.FloatField(null=True,
                                blank=True
                                )
-    from .feedback import Feedback
+    from feedbacksapp.models import Feedback
     feedbacks = GenericRelation(Feedback,
                                 related_query_name='company_feedbacks'
                                 )

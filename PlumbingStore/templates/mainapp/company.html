@@ -10,24 +10,20 @@
 <div>
     <h3>{{company.descr}}</h3>
 </div>
-<form action="{% url 'marketapp:follow' company.slug %}" method="post">
-    {% csrf_token %}
-    <button type="submit">Follow</button>
-</form>
 <hr>
 <br>
 <div>
     <div>
         {% for advert in object_list %}
         <div>
-            <a href="{% url 'marketapp:advert-page' advert.slug%}">
+            <a href="{% url 'mainapp:advert-page' advert.slug%}">
                 {{ advert.image }}<br>
                 {{ advert.title }}<br>
                 {{ advert.description }}
             </a>
         </div>
         {% endfor %}
-        <a href="{% url 'marketapp:feedback-section' company.slug %}">See feedbacks</a>
+        <a href="{% url 'feedbacksapp:feedback-section' company.slug %}">See feedbacks</a>
     </div>
 </div>
 {% endblock %}

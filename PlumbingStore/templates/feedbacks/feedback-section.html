@@ -13,7 +13,7 @@
 {% block content %}
     <div class="advert-feedback-section">
         <div class="form-section">
-            <form href="{% url 'marketapp:feedback-section' object_slug %}" method="post">
+            <form href="{% url 'feedbacksapp:feedback-section' object_slug %}" method="post">
                 {% csrf_token %}
                 {{ form }}
                 <button type="submit">Send Feedback</button>
