@@ -1,9 +1,8 @@
-from django.contrib.contenttypes.fields import GenericRelation
 from django.db import models
 from django.urls import reverse
 from django.utils import timezone
 
-from .feedback import Feedback
+from django.contrib.contenttypes.fields import GenericRelation
 
 
 class CompanyCategory(models.Model):
@@ -17,6 +16,8 @@ class CompanyCategory(models.Model):
 
 
 class Company(models.Model):
+    from marketapp.models import Feedback
+
     category = models.ForeignKey(CompanyCategory,
                                  null=True,
                                  on_delete=models.PROTECT,

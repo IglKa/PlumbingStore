@@ -1,10 +1,9 @@
 from django.db import models
 from django.urls import reverse
 
-from .company import Company
-
 
 class Follow(models.Model):
+    from .company import Company
     company = models.ForeignKey(Company,
                                 on_delete=models.CASCADE,
                                 null=True,
