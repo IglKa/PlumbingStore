@@ -10,6 +10,10 @@
 <div>
     <h3>{{company.descr}}</h3>
 </div>
+<form action="{% url 'marketapp:follow' company.slug %}" method="post">
+    {% csrf_token %}
+    <button type="submit">Follow</button>
+</form>
 <hr>
 <br>
 <div>

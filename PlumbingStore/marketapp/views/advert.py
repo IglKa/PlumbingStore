@@ -17,5 +17,3 @@ class AdvertDetailView(DetailView):
         context = super().get_context_data(**kwargs)
         context['menu'] = add_context()
         return context
-
-# Might provide some logic here, but for now leaving it till later.

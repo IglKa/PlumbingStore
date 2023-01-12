@@ -1,16 +1,17 @@
 from django.contrib import admin
-from django.db import models
 
-from .models import Advertisment,\
-                    Feedback, \
-                    Company, \
-                    AdvertCategory, \
-                    CompanyCategory
-
+from .models import Advertisment, \
+    Feedback, \
+    Company, \
+    AdvertCategory, \
+    CompanyCategory, \
+    Follow
 
 admin.site.register(Feedback)
 admin.site.register(AdvertCategory)
 admin.site.register(CompanyCategory)
+admin.site.register(Follow)
+
 
 @admin.register(Advertisment)
 class AdvertAdmin(admin.ModelAdmin):

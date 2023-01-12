@@ -1,10 +1,10 @@
+from django.contrib.contenttypes.fields import GenericRelation
 from django.db import models
 from django.urls import reverse
 from django.utils import timezone
 
-from django.contrib.contenttypes.fields import GenericRelation
-
 from .feedback import Feedback
+
 
 class CompanyCategory(models.Model):
     """Company category"""

@@ -1,11 +1,10 @@
 from django.shortcuts import render
 from django.views.generic import View
 
-import utils
 from marketapp.forms import CreateFeedbackForm
 from marketapp.services import get_model_instance, \
-                                    update_rating, \
-                                    find_feedbacks
+    update_rating, \
+    find_feedbacks
 
 
 class FeedbackSection(View):
