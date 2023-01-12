@@ -5,6 +5,7 @@ from django.http import Http404
 
 from mainapp.models import Advertisment, Company
 from utils import add_context
+from usersapp.services import get_user_profile
 
 
 def get_feedback_section_context(slug, form) -> dict:
@@ -23,7 +24,8 @@ def end_feedback_post_logic(user, form, model_instance) -> None:
 
 
 def create_feedback_instance(user, form, model_instance) -> None:
-    form.instance.user = user
+    """Will find user profile and create feedbacks instance"""
+    form.instance.profile = get_user_profile(user)
     form.instance.content_object = model_instance
     form.save()
 

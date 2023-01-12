@@ -14,7 +14,7 @@ class Feedback(models.Model):
         TWO = 2
         ONE = 1
 
-    user = models.ForeignKey('usersapp.User',
+    profile = models.ForeignKey('usersapp.Profile',
                              on_delete=models.CASCADE,
                              null=True
                              )
